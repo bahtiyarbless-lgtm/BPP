@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Бережливое производство | Үнемді өндіріс</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --a:#1A56DB;--al:#EBF0FF;--ad:#1240a8;
+  --t:#111827;--t2:#6B7280;--br:#E5E7EB;
+  --bg:#F3F4F6;--w:#fff;
+  --g:#059669;--gb:#ECFDF5;
+  --r:#DC2626;--rb:#FEF2F2;
+  --or:#D97706;--orb:#FFFBEB;
+  --pu:#7C3AED;--pub:#EDE9FE;
+  --rr:12px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--t);font-size:14px;padding-bottom:68px}
+
+/* HEADER */
+.hdr{background:var(--w);border-bottom:1px solid var(--br);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:8px}
+.hdr-t{font-size:14px;font-weight:800;line-height:1.2;flex:1;cursor:pointer;user-select:none}
+.hdr-s{font-size:10px;color:var(--t2);margin-top:1px}
+.hdr-r{display:flex;align-items:center;gap:8px}
+.ltg{display:flex;background:var(--bg);border-radius:8px;border:1px solid var(--br);overflow:hidden}
+.lb{padding:5px 12px;border:none;background:transparent;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;transition:all .15s}
+.lb.active{background:var(--a);color:#fff}
+.admin-btn{width:30px;height:30px;border:1px solid var(--br);border-radius:8px;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+
+/* NAV */
+.nav{position:fixed;bottom:0;left:0;right:0;background:var(--w);border-top:1px solid var(--br);display:flex;z-index:100}
+.ni{flex:1;display:flex;flex-direction:column;align-items:center;padding:7px 2px 5px;cursor:pointer;border:none;background:none;color:var(--t2);transition:color .15s;min-width:0}
+.ni.active{color:var(--a)}
+.ni-ic{font-size:17px}
+.ni-lb{font-size:9px;font-weight:700;margin-top:2px;white-space:nowrap}
+
+/* PAGES */
+.pg{display:none;padding:14px;animation:fi .2s ease}
+.pg.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* SHARED */
+.sec-lb{font-size:11px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.card{background:var(--w);border:1px solid var(--br);border-radius:var(--rr)}
+.btn-pri{background:var(--a);color:#fff;border:none;border-radius:10px;padding:11px 16px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn-ghost{background:transparent;border:1px solid var(--br);color:var(--t2);border-radius:8px;padding:7px 12px;font-family:'Inter',sans-serif;font-size:12px;font-weight:600;cursor:pointer}
+.btn-danger{background:#fee2e2;color:var(--r);border:none;border-radius:8px;padding:7px 12px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+
+/* TOOL LIST */
+.tool-row{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:13px 15px;margin-bottom:8px;cursor:pointer;display:flex;align-items:center;gap:12px;transition:border-color .15s}
+.tool-row:active{border-color:var(--a)}
+.t-ic{font-size:24px;flex-shrink:0}
+.t-nm{font-size:14px;font-weight:700;margin-bottom:2px}
+.t-ds{font-size:12px;color:var(--t2);line-height:1.35}
+.detail-v{display:none}.detail-v.active{display:block}
+.back-b{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:var(--w);border:1px solid var(--br);border-radius:8px;font-size:13px;font-weight:600;color:var(--t);cursor:pointer;margin-bottom:12px}
+.d-hero{padding:18px 16px 14px;border-bottom:1px solid var(--br)}
+.d-ic{font-size:28px;margin-bottom:8px}
+.d-nm{font-size:18px;font-weight:800;margin-bottom:4px}
+.d-tag{display:inline-block;font-size:11px;font-weight:600;color:var(--a);background:var(--al);padding:3px 10px;border-radius:20px;margin-bottom:8px}
+.d-desc{font-size:13px;color:var(--t2);line-height:1.55}
+.d-sec{padding:14px 16px;border-bottom:1px solid var(--br)}.d-sec:last-child{border-bottom:none}
+.d-slb{font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.step-r{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--br)}.step-r:last-child{border-bottom:none;padding-bottom:0}
+.sn{min-width:24px;height:24px;border-radius:50%;background:var(--a);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.st{font-size:13px;font-weight:700;margin-bottom:2px}
+.sd{font-size:12px;color:var(--t2);line-height:1.4}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{background:var(--al);color:var(--a);font-size:12px;font-weight:600;padding:5px 12px;border-radius:20px}
+
+/* QUIZ */
+.qpb{height:4px;background:var(--br);border-radius:2px;margin-bottom:14px;overflow:hidden}
+.qpf{height:100%;background:var(--a);border-radius:2px;transition:width .35s}
+.qc{font-size:12px;font-weight:600;color:var(--t2);margin-bottom:10px}
+.qq{font-size:15px;font-weight:700;line-height:1.5;margin-bottom:14px}
+.qopts{display:flex;flex-direction:column;gap:8px}
+.qo{background:var(--bg);border:1.5px solid var(--br);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:500;font-family:'Inter',sans-serif;cursor:pointer;text-align:left;transition:all .15s;line-height:1.4}
+.qo.correct{background:var(--gb);border-color:var(--g);color:#065f46}
+.qo.wrong{background:var(--rb);border-color:var(--r);color:#991b1b}
+.qo.disabled{pointer-events:none}
+.qfb{margin-top:12px;padding:12px 14px;border-radius:10px;font-size:13px;font-weight:500;line-height:1.4;display:none}
+.qfb.correct{background:var(--gb);color:#065f46;display:block}
+.qfb.wrong{background:var(--rb);color:#991b1b;display:block}
+.qnxt{width:100%;margin-top:12px;background:var(--a);color:#fff;border:none;border-radius:10px;padding:13px;font-family:'Inter',sans-serif;font-weight:700;font-size:14px;cursor:pointer;display:none}
+.qres{text-align:center;padding:20px 0 8px}
+.qscore{font-size:52px;font-weight:800;color:var(--a);line-height:1}
+.qslb{font-size:13px;color:var(--t2);margin:6px 0 4px}
+.qmsg{font-size:16px;font-weight:700;margin-bottom:18px}
+.qrst{background:var(--t);color:#fff;border:none;border-radius:10px;padding:12px 28px;font-family:'Inter',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
+
+/* CHECKLIST */
+.cl-stat{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.cl-sc{font-size:22px;font-weight:800;color:var(--a)}
+.cl-lbt{font-size:12px;color:var(--t2);margin-top:1px}
+.cl-bar{height:4px;background:var(--br);border-radius:2px;margin-top:8px;width:120px;overflow:hidden}
+.cl-bf{height:100%;background:var(--a);border-radius:2px;transition:width .3s}
+.audit-tabs{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;margin-bottom:12px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.audit-tabs::-webkit-scrollbar{display:none}
+.at{padding:6px 14px;border-radius:20px;border:1.5px solid var(--br);background:var(--w);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;white-space:nowrap;flex-shrink:0}
+.at.active{background:var(--a);border-color:var(--a);color:#fff}
+.cl-sh{font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.06em;padding:6px 0;margin:10px 0 6px;border-bottom:1px solid var(--br)}
+.cl-it{display:flex;align-items:flex-start;gap:10px;background:var(--w);border:1px solid var(--br);border-radius:10px;padding:11px 13px;margin-bottom:6px;cursor:pointer;transition:all .15s}
+.cl-it.chk{background:var(--gb);border-color:#a7f3d0}
+.cl-bx{width:20px;height:20px;border:1.5px solid var(--br);border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;transition:all .15s;margin-top:1px}
+.cl-it.chk .cl-bx{background:var(--g);border-color:var(--g);color:#fff}
+.cl-tx{font-size:13px;font-weight:500;line-height:1.4}
+.cl-it.chk .cl-tx{color:var(--t2);text-decoration:line-through}
+.audit-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:auto;flex-shrink:0}
+
+/* RESULTS */
+.res-hdr{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:14px 16px;margin-bottom:12px}
+.res-year{font-size:11px;font-weight:700;color:var(--a);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.res-co{width:100%;border:none;font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--t);outline:none;background:transparent}
+.res-co::placeholder{color:#d1d5db;font-weight:400}
+.kpi-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.kpi-card{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:12px 14px}
+.kpi-icon{font-size:20px;margin-bottom:6px}
+.kpi-nm{font-size:11px;font-weight:600;color:var(--t2);line-height:1.3;margin-bottom:6px}
+.kpi-val-wrap{display:flex;align-items:baseline;gap:4px}
+.kpi-val{font-size:24px;font-weight:800;color:var(--t);cursor:pointer;min-width:40px;border-bottom:1.5px dashed var(--br);transition:border-color .15s;outline:none}
+.kpi-val:focus{border-bottom-color:var(--a);color:var(--a)}
+.kpi-unit{font-size:12px;font-weight:600;color:var(--t2)}
+.proj-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.add-b{display:inline-flex;align-items:center;gap:4px;padding:6px 12px;background:var(--al);color:var(--a);border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.proj-card{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:12px 14px;margin-bottom:8px}
+.proj-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.proj-name{flex:1;border:none;border-bottom:1.5px solid var(--br);font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:var(--t);outline:none;background:transparent;padding-bottom:2px}
+.proj-name::placeholder{color:#d1d5db;font-weight:400}
+.proj-name:focus{border-bottom-color:var(--a)}
+.del-b{background:none;border:none;color:var(--t2);font-size:16px;cursor:pointer;padding:2px;flex-shrink:0}
+.proj-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.proj-field{display:flex;flex-direction:column;gap:3px}
+.pf-lb{font-size:10px;font-weight:600;color:var(--t2);text-transform:uppercase;letter-spacing:.04em}
+.pf-in{border:none;border-bottom:1.5px solid var(--br);font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--t);outline:none;background:transparent;width:100%;padding-bottom:2px}
+.pf-in::placeholder{color:#d1d5db;font-weight:400}
+.pf-in.aft{color:var(--g)}.pf-in.eff{color:var(--a)}
+.save-note{font-size:11px;color:var(--t2);text-align:center;margin-top:12px;padding:8px;background:var(--orb);border-radius:8px;border:1px solid #fde68a}
+
+/* LITERATURE */
+.book-card{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:14px 16px;margin-bottom:8px}
+.book-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.book-em{font-size:26px;flex-shrink:0;margin-top:2px}
+.book-info{flex:1;min-width:0}
+.book-title{font-size:14px;font-weight:800;margin-bottom:2px;line-height:1.3}
+.book-author{font-size:12px;color:var(--t2);margin-bottom:5px}
+.book-badges{display:flex;gap:5px;flex-wrap:wrap}
+.badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px}
+.b-free{background:#dcfce7;color:#166534}.b-paid{background:#f3f4f6;color:var(--t2)}
+.b-beg{background:#fef3c7;color:#92400e}.b-mid{background:#dbeafe;color:#1e40af}.b-adv{background:#ede9fe;color:#5b21b6}
+.book-desc{font-size:12px;color:var(--t2);line-height:1.5;margin-bottom:10px}
+.book-link{display:inline-flex;align-items:center;gap:5px;background:var(--a);color:#fff;text-decoration:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700}
+.book-link.free{background:var(--g)}
+
+/* GLOSSARY */
+.srch{width:100%;background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:11px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;margin-bottom:12px;color:var(--t);transition:border-color .15s}
+.srch:focus{border-color:var(--a)}
+.gl-it{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:14px 16px;margin-bottom:8px;border-left:3px solid var(--a)}
+.gl-term{font-size:15px;font-weight:800;color:var(--t);margin-bottom:3px}
+.gl-orig{font-size:11px;font-weight:600;color:var(--a);margin-bottom:6px}
+.gl-def{font-size:13px;color:var(--t);line-height:1.55;font-weight:400}
+
+/* ADMIN OVERLAY */
+.admin-ov{position:fixed;inset:0;background:var(--bg);z-index:200;display:none;flex-direction:column}
+.admin-ov.show{display:flex}
+.admin-hdr{background:var(--w);border-bottom:1px solid var(--br);padding:14px 16px;display:flex;align-items:center;justify-content:space-between}
+.admin-hdr h2{font-size:16px;font-weight:800}
+.admin-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--t2)}
+.admin-tabs{display:flex;border-bottom:1px solid var(--br);background:var(--w)}
+.adm-tab{flex:1;padding:10px 4px;border:none;background:none;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s}
+.adm-tab.active{color:var(--a);border-bottom-color:var(--a)}
+.admin-body{flex:1;overflow-y:auto;padding:14px}
+.adm-panel{display:none}.adm-panel.active{display:block}
+.adm-section{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);margin-bottom:12px;overflow:hidden}
+.adm-sec-hdr{padding:12px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--br);background:var(--bg)}
+.adm-sec-title{font-size:13px;font-weight:700}
+.adm-item-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--br)}
+.adm-item-row:last-child{border-bottom:none}
+.adm-inp{flex:1;border:1px solid var(--br);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px;outline:none;color:var(--t)}
+.adm-inp:focus{border-color:var(--a)}
+.adm-del{background:none;border:none;color:var(--r);font-size:16px;cursor:pointer;flex-shrink:0;padding:2px}
+.adm-save{background:var(--g);color:#fff;border:none;border-radius:8px;padding:7px 14px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.adm-add{display:flex;gap:8px;padding:10px 14px;border-top:1px solid var(--br)}
+.adm-add-inp{flex:1;border:1px solid var(--br);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px;outline:none;color:var(--t)}
+.adm-add-inp:focus{border-color:var(--a)}
+.adm-add-btn{background:var(--al);color:var(--a);border:none;border-radius:8px;padding:8px 14px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;cursor:pointer}
+.tool-edit-card{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:14px;margin-bottom:10px}
+.tool-edit-label{font-size:10px;font-weight:700;color:var(--t2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.tool-edit-inp{width:100%;border:1px solid var(--br);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px;outline:none;color:var(--t);margin-bottom:10px}
+.tool-edit-inp:focus{border-color:var(--a)}
+.tool-edit-ta{width:100%;border:1px solid var(--br);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:13px;outline:none;color:var(--t);resize:vertical;min-height:60px;margin-bottom:10px}
+.tool-edit-ta:focus{border-color:var(--a)}
+.login-box{background:var(--w);border:1px solid var(--br);border-radius:var(--rr);padding:24px;max-width:320px;margin:40px auto}
+.login-box h3{font-size:16px;font-weight:800;margin-bottom:6px}
+.login-box p{font-size:13px;color:var(--t2);margin-bottom:16px}
+.login-inp{width:100%;border:1px solid var(--br);border-radius:10px;padding:12px 14px;font-family:'Inter',sans-serif;font-size:14px;outline:none;margin-bottom:10px}
+.login-inp:focus{border-color:var(--a)}
+.login-err{color:var(--r);font-size:12px;margin-bottom:10px;display:none}
+.lang-switch{display:flex;gap:8px;margin-bottom:12px}
+.ls-btn{padding:6px 14px;border-radius:8px;border:1.5px solid var(--br);background:var(--bg);font-family:'Inter',sans-serif;font-size:12px;font-weight:700;color:var(--t2);cursor:pointer}
+.ls-btn.active{background:var(--a);border-color:var(--a);color:#fff}
+.info-box{background:var(--al);border-radius:10px;padding:12px 14px;font-size:12px;color:var(--a);margin-bottom:12px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div style="flex:1;min-width:0">
+    <div class="hdr-t" id="appTitle" onclick="adminTap()">Бережливое производство</div>
+    <div class="hdr-s">Lean Manufacturing</div>
+  </div>
+  <div class="hdr-r">
+    <div class="ltg">
+      <button class="lb active" onclick="setLang('ru')">RU</button>
+      <button class="lb" onclick="setLang('kz')">ҚЗ</button>
+    </div>
+    <button class="admin-btn" onclick="openAdmin()" title="Админ">⚙️</button>
+  </div>
+</div>
+
+<!-- THEORY -->
+<div class="pg active" id="pg-theory">
+  <div class="sec-lb" id="lb-tools">Инструменты</div>
+  <div id="toolsGrid"></div>
+  <div class="detail-v" id="detailV">
+    <button class="back-b" onclick="closeDetail()">← <span id="lb-back">Назад</span></button>
+    <div class="card" id="detailC"></div>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="pg" id="pg-quiz">
+  <div class="sec-lb" id="lb-quiz">Тест</div>
+  <div class="card" style="padding:18px"><div id="quizBody"></div></div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="pg" id="pg-checklist">
+  <div class="cl-stat">
+    <div>
+      <div class="cl-sc"><span id="clDone">0</span>/<span id="clTotal">0</span></div>
+      <div class="cl-lbt" id="lb-cllabel">пунктов выполнено</div>
+      <div class="cl-bar"><div class="cl-bf" id="clBar" style="width:0%"></div></div>
+    </div>
+    <button class="btn-ghost" onclick="resetCL()" id="lb-reset">↺ Сброс</button>
+  </div>
+  <div class="audit-tabs" id="auditTabs"></div>
+  <div id="clBody"></div>
+</div>
+
+<!-- RESULTS -->
+<div class="pg" id="pg-results">
+  <div class="res-hdr">
+    <div class="res-year">2025</div>
+    <input class="res-co" id="companyName" maxlength="60" oninput="saveRes()"/>
+  </div>
+  <div class="sec-lb" id="lb-kpi">KPI показатели</div>
+  <div class="kpi-grid" id="kpiGrid"></div>
+  <div class="proj-hdr">
+    <div class="sec-lb" style="margin-bottom:0" id="lb-proj">Проекты</div>
+    <button class="add-b" onclick="addProject()" id="lb-addproj">+ Добавить</button>
+  </div>
+  <div id="projList"></div>
+  <div class="save-note" id="lb-savenote">💾 Данные сохраняются в браузере</div>
+</div>
+
+<!-- LITERATURE -->
+<div class="pg" id="pg-lit">
+  <div class="sec-lb" id="lb-lit">Литература</div>
+  <div id="litBody"></div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="pg" id="pg-glossary">
+  <input class="srch" id="srch" oninput="filterGL()"/>
+  <div id="glBody"></div>
+</div>
+
+<!-- ADMIN OVERLAY -->
+<div class="admin-ov" id="adminOv">
+  <!-- LOGIN -->
+  <div id="adminLogin" style="padding:14px">
+    <div class="login-box">
+      <h3>⚙️ Панель администратора</h3>
+      <p>Введите пароль для доступа к редактированию</p>
+      <input class="login-inp" type="password" id="passInp" placeholder="Пароль..." onkeydown="if(event.key==='Enter')checkPass()"/>
+      <div class="login-err" id="passErr">Неверный пароль</div>
+      <button class="btn-pri" style="width:100%;justify-content:center" onclick="checkPass()">Войти</button>
+      <button class="btn-ghost" style="width:100%;margin-top:8px;justify-content:center;display:flex" onclick="closeAdmin()">Отмена</button>
+      <div style="margin-top:14px;padding:10px;background:var(--orb);border-radius:8px;font-size:11px;color:var(--or)">По умолчанию пароль: <b>lean2025</b></div>
+    </div>
+  </div>
+  <!-- PANEL -->
+  <div id="adminPanel" style="display:none;flex-direction:column;flex:1;min-height:0">
+    <div class="admin-hdr">
+      <h2>⚙️ Редактор</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div class="admin-tabs">
+      <button class="adm-tab active" onclick="switchAdmTab('cl',this)" id="at1">Чек-лист</button>
+      <button class="adm-tab" onclick="switchAdmTab('tools',this)" id="at2">Инструменты</button>
+      <button class="adm-tab" onclick="switchAdmTab('settings',this)" id="at3">Настройки</button>
+    </div>
+    <div class="admin-body">
+
+      <!-- CHECKLIST EDITOR -->
+      <div class="adm-panel active" id="adm-cl">
+        <div class="info-box">Редактируйте пункты чек-листа для выбранного языка. Изменения сохраняются автоматически.</div>
+        <div class="lang-switch">
+          <button class="ls-btn active" onclick="setAdmLang('ru',this)">RU</button>
+          <button class="ls-btn" onclick="setAdmLang('kz',this)">ҚЗ</button>
+        </div>
+        <div id="admClBody"></div>
+      </div>
+
+      <!-- TOOLS EDITOR -->
+      <div class="adm-panel" id="adm-tools">
+        <div class="info-box">Редактируйте описания инструментов. Шаги и выгоды редактируются через каждое поле.</div>
+        <div class="lang-switch">
+          <button class="ls-btn active" onclick="setAdmToolLang('ru',this)">RU</button>
+          <button class="ls-btn" onclick="setAdmToolLang('kz',this)">ҚЗ</button>
+        </div>
+        <div id="admToolSelector" style="margin-bottom:12px"></div>
+        <div id="admToolBody"></div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="adm-panel" id="adm-settings">
+        <div class="adm-section">
+          <div class="adm-sec-hdr"><span class="adm-sec-title">🔐 Изменить пароль</span></div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
+            <input class="adm-inp" type="password" id="newPass1" placeholder="Новый пароль..."/>
+            <input class="adm-inp" type="password" id="newPass2" placeholder="Повторите пароль..."/>
+            <div id="passChangeErr" style="font-size:12px;color:var(--r);display:none"></div>
+            <button class="btn-pri" onclick="changePass()">Сохранить пароль</button>
+          </div>
+        </div>
+        <div class="adm-section">
+          <div class="adm-sec-hdr"><span class="adm-sec-title">🗄️ Данные приложения</span></div>
+          <div style="padding:14px;display:flex;flex-direction:column;gap:8px">
+            <div id="dataInfo" style="font-size:12px;color:var(--t2);line-height:1.6"></div>
+            <button class="btn-danger" onclick="resetAllData()">⚠️ Сбросить все изменения к настройкам по умолчанию</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="nav">
+  <button class="ni active" onclick="showPg('theory',this)"><span class="ni-ic">📚</span><span class="ni-lb" id="n1">Теория</span></button>
+  <button class="ni" onclick="showPg('quiz',this)"><span class="ni-ic">🧠</span><span class="ni-lb" id="n2">Тест</span></button>
+  <button class="ni" onclick="showPg('checklist',this)"><span class="ni-ic">✅</span><span class="ni-lb" id="n3">Аудит</span></button>
+  <button class="ni" onclick="showPg('results',this)"><span class="ni-ic">📊</span><span class="ni-lb" id="n4">Итоги</span></button>
+  <button class="ni" onclick="showPg('lit',this)"><span class="ni-ic">📖</span><span class="ni-lb" id="n5">Книги</span></button>
+  <button class="ni" onclick="showPg('glossary',this)"><span class="ni-ic">🔤</span><span class="ni-lb" id="n6">Сл-рь</span></button>
+</nav>
+
+<script>
+// ═══════════════════════════════════════════
+// DATABASE LAYER
+// ═══════════════════════════════════════════
+const DB={
+  get(k){try{const v=localStorage.getItem('bp_'+k);return v?JSON.parse(v):null;}catch(e){return null;}},
+  set(k,v){try{localStorage.setItem('bp_'+k,JSON.stringify(v));return true;}catch(e){return false;}},
+  del(k){try{localStorage.removeItem('bp_'+k);}catch(e){}},
+  size(){try{let s=0;for(let k in localStorage){if(k.startsWith('bp_'))s+=localStorage.getItem(k).length;}return Math.round(s/1024);}catch(e){return 0;}}
+};
+function gd(k,def){const v=DB.get(k);return v!==null?v:def;}
+
+// ═══════════════════════════════════════════
+// TRANSLATIONS
+// ═══════════════════════════════════════════
+const T={
+  ru:{appTitle:'Бережливое производство',lbTools:'Инструменты',lbBack:'Назад',lbQuiz:'Тест',lbCllabel:'пунктов выполнено',lbKpi:'KPI показатели',lbProj:'Проекты',lbAddproj:'+ Добавить',lbLit:'Литература',lbSavenote:'💾 Данные сохраняются в браузере',coPh:'Название компании...',srchPh:'Поиск термина...',nav:['Теория','Тест','Аудит','Итоги','Книги','Сл-рь'],stepsLb:'ШАГИ',bensLb:'РЕЗУЛЬТАТЫ',qOf:'Вопрос',qNext:'Следующий вопрос →',qFinish:'Завершить тест',qRestart:'Пройти снова',qRLb:'правильных ответов',qGreat:'🎉 Отличный результат!',qGood:'👍 Хорошо!',qTry:'💪 Попробуйте ещё раз',pjBefore:'До',pjAfter:'После',pjEffect:'Эффект',pjPh:'Название проекта...',bFree:'🆓 Бесплатно',bPaid:'Платная',bBeg:'Начинающим',bMid:'Средний',bAdv:'Продвинутый',dlFree:'Скачать бесплатно',dlPaid:'Найти книгу',auditAll:'Все'},
+  kz:{appTitle:'Үнемді өндіріс',lbTools:'Құралдар',lbBack:'Артқа',lbQuiz:'Тест',lbCllabel:'тармақ орындалды',lbKpi:'KPI көрсеткіштері',lbProj:'Жобалар',lbAddproj:'+ Қосу',lbLit:'Әдебиет',lbSavenote:'💾 Деректер браузерде сақталады',coPh:'Компания атауы...',srchPh:'Термин іздеу...',nav:['Теория','Тест','Аудит','Қорытынды','Кітаптар','Сөздік'],stepsLb:'ҚАДАМДАР',bensLb:'НӘТИЖЕЛЕР',qOf:'Сұрақ',qNext:'Келесі сұрақ →',qFinish:'Тестті аяқтау',qRestart:'Қайта өту',qRLb:'дұрыс жауап',qGreat:'🎉 Тамаша нәтиже!',qGood:'👍 Жақсы!',qTry:'💪 Қайтадан көріңіз',pjBefore:'Дейін',pjAfter:'Кейін',pjEffect:'Нәтиже',pjPh:'Жоба атауы...',bFree:'🆓 Тегін',bPaid:'Ақылы',bBeg:'Жаңадан бастаушылар',bMid:'Орта деңгей',bAdv:'Жоғары деңгей',dlFree:'Тегін жүктеу',dlPaid:'Кітапты табу',auditAll:'Барлығы'}
+};
+
+// ═══════════════════════════════════════════
+// DEFAULT TOOLS DATA (9 инструментов)
+// ═══════════════════════════════════════════
+const DEF_TOOLS={
+  ru:[
+    {id:'5s',icon:'🏭',name:'5S',tag:'Организация рабочего места',desc:'Система организации рабочего пространства из 5 японских принципов',full:'Методология организации рабочего места на основе 5 японских слов. Цель — создать безопасное, чистое и эффективное рабочее место.',steps:[{n:'1',t:'Сортировка (Seiri)',d:'Убрать всё ненужное. Оставить только необходимые предметы.'},{n:'2',t:'Систематизация (Seiton)',d:'Каждая вещь — на своём месте. Расположить так, чтобы легко найти.'},{n:'3',t:'Уборка (Seiso)',d:'Содержать место в чистоте. Регулярная уборка выявляет проблемы.'},{n:'4',t:'Стандартизация (Seiketsu)',d:'Закрепить результаты в стандартах и инструкциях.'},{n:'5',t:'Совершенствование (Shitsuke)',d:'Поддерживать дисциплину и постоянно улучшать систему.'}],benefits:['Меньше потерь времени','Безопасность','Рост качества','Мотивация','Видимость проблем']},
+    {id:'kaizen',icon:'🔄',name:'Кайдзен',tag:'Постоянное улучшение',desc:'Философия непрерывного совершенствования всех процессов',full:'Кайдзен (改善) — «изменение к лучшему». Философия постепенного улучшения через цикл PDCA.',steps:[{n:'P',t:'Plan — Планируй',d:'Выявите проблему и разработайте план улучшения.'},{n:'D',t:'Do — Делай',d:'Реализуйте план в малом масштабе.'},{n:'C',t:'Check — Проверяй',d:'Оцените результаты. Получилось ли запланированное?'},{n:'A',t:'Act — Действуй',d:'Закрепите успешные изменения или скорректируйте план.'}],benefits:['Вовлечённость','Снижение потерь','Рост качества','Культура улучшений']},
+    {id:'kanban',icon:'📋',name:'Канбан',tag:'Управление потоком',desc:'Визуальная система управления производственным потоком',full:'Канбан (看板) — система вытягивания. Производи только то, что нужно, когда нужно.',steps:[{n:'1',t:'Визуализируй поток',d:'Доска: «К выполнению», «В процессе», «Готово».'},{n:'2',t:'Ограничь WIP',d:'Установи лимит незавершённой работы.'},{n:'3',t:'Управляй потоком',d:'Следи за картами. Устраняй блокировки.'},{n:'4',t:'Улучшай',d:'Анализируй метрики и оптимизируй.'}],benefits:['Прозрачность','Снижение запасов','Быстрая реакция','Чёткие приоритеты']},
+    {id:'muda',icon:'🚫',name:'8 видов потерь (Муда)',tag:'Устранение потерь',desc:'Классификация потерь, не создающих ценности',full:'Муда (無駄) — «потери». 8 видов потерь, которые нужно выявлять и устранять.',steps:[{n:'T',t:'Транспортировка',d:'Лишние перемещения материалов.'},{n:'I',t:'Запасы',d:'Избыточные запасы и незавершённое производство.'},{n:'M',t:'Движение',d:'Лишние движения операторов.'},{n:'W',t:'Ожидание',d:'Простои оборудования или сотрудников.'},{n:'O',t:'Перепроизводство',d:'Производство сверх потребности.'},{n:'D',t:'Дефекты',d:'Переработка и исправление ошибок.'},{n:'P',t:'Излишняя обработка',d:'Операции сверх требований.'},{n:'S',t:'Нереализованный потенциал',d:'Неиспользованные таланты сотрудников.'}],benefits:['Снижение затрат','Рост производительности','Повышение качества']},
+    {id:'vsm',icon:'🗺️',name:'VSM — Карта потока',tag:'Анализ процессов',desc:'Инструмент визуализации потока создания ценности',full:'Value Stream Mapping (VSM) — инструмент для визуализации, анализа и улучшения потока.',steps:[{n:'1',t:'Выбери продукт',d:'Определи поток для картирования.'},{n:'2',t:'Текущее состояние',d:'Зафиксируй все процессы и запасы как есть.'},{n:'3',t:'Выявь потери',d:'Определи узкие места и время ожидания.'},{n:'4',t:'Будущее состояние',d:'Спроектируй поток без потерь.'},{n:'5',t:'Реализуй план',d:'Разработай план перехода и внедряй.'}],benefits:['Видимость потока','Узкие места','Основа улучшений','Общий язык']},
+    {id:'tpm',icon:'🔧',name:'TPM — Всеобщее обслуживание',tag:'Обслуживание оборудования',desc:'Система вовлечения всего персонала в обслуживание оборудования',full:'Total Productive Maintenance (TPM) — система, при которой каждый оператор несёт ответственность за своё оборудование. Цель — ноль поломок, ноль дефектов.',steps:[{n:'1',t:'Автономное обслуживание',d:'Операторы сами чистят, смазывают и осматривают оборудование.'},{n:'2',t:'Плановое обслуживание',d:'Профилактические работы по расписанию для предотвращения поломок.'},{n:'3',t:'Обучение персонала',d:'Повышение компетенций операторов и ремонтников.'},{n:'4',t:'Измерение OEE',d:'Отслеживание коэффициента общей эффективности оборудования.'},{n:'5',t:'Кайдзен оборудования',d:'Непрерывное улучшение надёжности машин и процессов.'}],benefits:['Ноль поломок','Рост OEE','Вовлечённость операторов','Снижение затрат на ремонт']},
+    {id:'smed',icon:'⚡',name:'SMED — Быстрая переналадка',tag:'Сокращение времени переналадки',desc:'Метод сокращения времени переналадки оборудования до менее 10 минут',full:'Single Minute Exchange of Die (SMED) — система сокращения переналадки оборудования. Разделяет операции на внутренние (при остановке) и внешние (во время работы).',steps:[{n:'1',t:'Наблюдение и запись',d:'Зафиксируй все шаги переналадки на видео. Засеки время каждого.'},{n:'2',t:'Разделение операций',d:'Раздели на внутренние (только при остановке) и внешние (во время работы).'},{n:'3',t:'Перевод во внешние',d:'Максимально переведи операции во внешние: готовь инструмент заранее.'},{n:'4',t:'Сокращение внутренних',d:'Упрости, стандартизируй и параллелизируй оставшиеся операции.'},{n:'5',t:'Стандартизируй',d:'Закрепи новый порядок в стандарте. Тренируй команду.'}],benefits:['Быстрее переналадка','Меньше простоев','Больше гибкости','Мелкие партии']},
+    {id:'5why',icon:'❓',name:'5 Почему',tag:'Анализ корневых причин',desc:'Метод поиска истинной причины проблемы путём последовательных вопросов',full:'Метод «5 Почему» — простой инструмент анализа корневых причин. Задавая вопрос «Почему?» 5 раз подряд, находишь настоящую причину проблемы, а не её симптомы.',steps:[{n:'1',t:'Опиши проблему',d:'Сформулируй конкретно: что, где, когда произошло.'},{n:'2',t:'Спроси Почему №1',d:'Почему это произошло? Запиши прямую причину.'},{n:'3',t:'Спроси Почему №2-4',d:'Задавай «Почему?» к каждому предыдущему ответу.'},{n:'4',t:'Найди корневую причину',d:'На 5-м «Почему» обычно находится системная причина.'},{n:'5',t:'Реши и предотврати',d:'Устрани корневую причину. Не просто симптом.'}],benefits:['Простота','Не нужны данные','Находит реальную причину','Предотвращает повторение']},
+    {id:'a3',icon:'📄',name:'A3 — Решение проблем',tag:'Структурированное мышление',desc:'Одностраничный формат для решения проблем и принятия решений',full:'Отчёт A3 — структурированный подход к решению проблем на одном листе формата A3. Включает все этапы: от описания проблемы до плана действий.',steps:[{n:'1',t:'Фон / Контекст',d:'Почему эта проблема важна? Какова текущая ситуация?'},{n:'2',t:'Текущее состояние',d:'Факты и данные о проблеме. Графики, диаграммы.'},{n:'3',t:'Целевое состояние',d:'Как должно быть? Конкретная измеримая цель.'},{n:'4',t:'Анализ причин',d:'5 Почему или диаграмма Исикавы для поиска корней.'},{n:'5',t:'Контрмеры и план',d:'Конкретные действия, сроки, ответственные. Проверка результата.'}],benefits:['Структурное мышление','Одна страница','Наглядность','Вовлечённость команды']},
+  ],
+  kz:[
+    {id:'5s',icon:'🏭',name:'5С',tag:'Жұмыс орнын ұйымдастыру',desc:'5 жапондық принципке негізделген жұмыс кеңістігін ұйымдастыру жүйесі',full:'Жапондық 5 сөзге негізделген жұмыс орнын ұйымдастыру әдістемесі. Мақсаты — қауіпсіз, таза және тиімді жұмыс орнын құру.',steps:[{n:'1',t:'Сұрыптау (Seiri)',d:'Қажет емес заттарды алып тастаңыз.'},{n:'2',t:'Жүйелеу (Seiton)',d:'Әр затқа өз орны болуы керек.'},{n:'3',t:'Тазалық (Seiso)',d:'Жұмыс орнын таза ұстаңыз.'},{n:'4',t:'Стандарттау (Seiketsu)',d:'Нәтижелерді стандарттар түрінде бекітіңіз.'},{n:'5',t:'Жетілдіру (Shitsuke)',d:'Тәртіпті сақтаңыз және жүйені жетілдіріңіз.'}],benefits:['Уақыт шығынының азаюы','Қауіпсіздік','Сапаның жоғарылауы','Мотивация','Мәсelelerdің көрінуі']},
+    {id:'kaizen',icon:'🔄',name:'Кайдзен',tag:'Үздіксіз жетілдіру',desc:'Барлық процестерді үздіксіз жетілдіру философиясы',full:'Кайдзен (改善) — «жақсы жаққа өзгеру». PDCA циклі арқылы барлық аспектілерді біртіндеп жетілдіру.',steps:[{n:'P',t:'Жоспарла (Plan)',d:'Проблеманы анықтаңыз және жетілдіру жоспарын жасаңыз.'},{n:'D',t:'Орында (Do)',d:'Жоспарды шағын масштабта жүзеге асырыңыз.'},{n:'C',t:'Тексер (Check)',d:'Нәтижелерді бағалаңыз.'},{n:'A',t:'Іс-қимыл жаса (Act)',d:'Сәтті өзгерістерді бекітіңіз немесе жоспарды түзетіңіз.'}],benefits:['Қызметкерлердің қатысуы','Шығынның азаюы','Сапаның өсуі','Жетілдіру мәдениеті']},
+    {id:'kanban',icon:'📋',name:'Канбан',tag:'Ағынды басқару',desc:'Өндірістік ағынды басқарудың визуалды жүйесі',full:'Канбан (看板) — тарту жүйесі. Тек қажет кезде, қажет мөлшерде өндіріңіз.',steps:[{n:'1',t:'Ағынды визуалдаңыз',d:'«Орындалатын», «Процесте», «Дайын» бағандары бар тақта.'},{n:'2',t:'WIP шегін қойыңыз',d:'Аяқталмаған жұмыс мөлшерін шектеңіз.'},{n:'3',t:'Ағынды басқарыңыз',d:'Карталардың қозғалысын бақылаңыз.'},{n:'4',t:'Жетілдіріңіз',d:'Метрикаларды талдаңыз және процесті оңтайландырыңыз.'}],benefits:['Процестің ашықтығы','Қорлардың азаюы','Жылдам реакция','Нақты басымдықтар']},
+    {id:'muda',icon:'🚫',name:'8 шығын түрі (Муда)',tag:'Шығынды жою',desc:'Тұтынушы үшін құндылық тудырмайтын шығын түрлері',full:'Муда (無駄) — «шығын». Кез келген өндірісте анықталып, жойылуы тиіс 8 шығын түрі.',steps:[{n:'T',t:'Тасымалдау',d:'Материалдардың артық қозғалысы.'},{n:'I',t:'Қорлар',d:'Шикізаттың артық қоры.'},{n:'M',t:'Қозғалыс',d:'Операторлардың артық қозғалысы.'},{n:'W',t:'Күту',d:'Жабдық немесе қызметкерлердің тоқтап тұруы.'},{n:'O',t:'Артық өндіріс',d:'Тұтынушы талап еткеннен көп өндіру.'},{n:'D',t:'Ақаулар',d:'Қайта өңдеу және қателерді түзету.'},{n:'P',t:'Артық өңдеу',d:'Талаптан тыс операцияларды орындау.'},{n:'S',t:'Іске асырылмаған әлеует',d:'Қызметкерлердің пайдаланылмаған таланттары.'}],benefits:['Шығындардың азаюы','Өнімділіктің өсуі','Сапаның жоғарылауы']},
+    {id:'vsm',icon:'🗺️',name:'VSM — Құн ағынының картасы',tag:'Процестерді талдау',desc:'Бүкіл құн жасау ағынын визуалдау және талдау құралы',full:'Value Stream Mapping (VSM) — материалдар мен ақпарат ағынын визуалдау, талдау және жетілдіру құралы.',steps:[{n:'1',t:'Өнімді таңдаңыз',d:'Қандай ағынды картаға түсіретінізді анықтаңыз.'},{n:'2',t:'Ағымдағы жай',d:'Барлық процестерді және қорларды белгілеңіз.'},{n:'3',t:'Шығынды анықтаңыз',d:'Тар жерлерді және күту уақытын анықтаңыз.'},{n:'4',t:'Болашақ жай',d:'Шығынсыз идеалды ағынды жобалаңыз.'},{n:'5',t:'Жоспарды іске асырыңыз',d:'Өту жоспарын жасаңыз және өзгерістерді енгізіңіз.'}],benefits:['Бүкіл ағынның көрінуі','Тар жерлерді анықтау','Жетілдіру негізі','Ортақ тіл']},
+    {id:'tpm',icon:'🔧',name:'ЖҚЖ — Жалпы қызмет көрсету',tag:'Жабдыққа қызмет көрсету',desc:'Барлық персоналды жабдыққа күтімге тарту жүйесі',full:'Total Productive Maintenance (TPM) — әр оператор өз жабдығына жауапты болатын жүйе. Мақсат — нөлдік бұзылулар, нөлдік ақаулар.',steps:[{n:'1',t:'Дербес қызмет',d:'Операторлар жабдықты өздері тазалайды, майлайды және тексереді.'},{n:'2',t:'Жоспарлы қызмет',d:'Бұзылулардың алдын алу үшін кестелі профилактикалық жұмыстар.'},{n:'3',t:'Персоналды оқыту',d:'Оператор мен жөндеушілердің құзыреттілігін арттыру.'},{n:'4',t:'OEE өлшеу',d:'Жабдықтың жалпы тиімділік коэффициентін бақылау.'},{n:'5',t:'Жабдық Кайдзені',d:'Машиналар мен процестердің сенімділігін үздіксіз жетілдіру.'}],benefits:['Нөлдік бұзылулар','OEE өсуі','Оператор қатысуы','Жөндеу шығынының азаюы']},
+    {id:'smed',icon:'⚡',name:'SMED — Жылдам қайта баптау',tag:'Қайта баптау уақытын қысқарту',desc:'Жабдықты қайта баптау уақытын 10 минуттан аз етуге арналған әдіс',full:'Single Minute Exchange of Die (SMED) — жабдықты қайта баптауды қысқарту жүйесі. Операцияларды ішкі (тоқтатылғанда) және сыртқы (жұмыс кезінде) деп бөледі.',steps:[{n:'1',t:'Бақылау және жазу',d:'Барлық қайта баптау қадамдарын бейнеге түсіріңіз. Әр қадамның уақытын өлшеңіз.'},{n:'2',t:'Операцияларды бөлу',d:'Ішкі (тоқтатылғанда ғана) және сыртқы (жұмыс кезінде) деп бөліңіз.'},{n:'3',t:'Сыртқыға аудару',d:'Мүмкіндігінше операцияларды сыртқыға аударыңыз: құралды алдын ала дайындаңыз.'},{n:'4',t:'Ішкіні қысқарту',d:'Қалған операцияларды жеңілдетіңіз, стандарттаңыз.'},{n:'5',t:'Стандарттаңыз',d:'Жаңа тәртіпті стандартқа бекітіңіз. Командаға үйретіңіз.'}],benefits:['Жылдам қайта баптау','Тоқтап тұру уақытының азаюы','Икемділіктің артуы','Ұсақ партиялар']},
+    {id:'5why',icon:'❓',name:'5 Неліктен',tag:'Түпкі себепті талдау',desc:'Дәйекті сұрақтар арқылы мәселенің нақты себебін табу әдісі',full:'«5 Неліктен» әдісі — түпкі себепті талдаудың қарапайым құралы. «Неліктен?» деп 5 рет сұрай отырып, мәселенің нақты себебін, симптомдарын емес, табасың.',steps:[{n:'1',t:'Мәселені сипаттаңыз',d:'Нақты тұжырымдаңыз: не, қай жерде, қашан болды.'},{n:'2',t:'Неліктен №1',d:'Бұл неліктен болды? Тікелей себепті жазыңыз.'},{n:'3',t:'Неліктен №2-4',d:'Әр алдыңғы жауапқа «Неліктен?» деп сұраңыз.'},{n:'4',t:'Түпкі себепті табыңыз',d:'5-ші «Неліктен»-де жүйелік себеп табылады.'},{n:'5',t:'Шешіңіз және алдын алыңыз',d:'Түпкі себепті жойыңыз. Тек симптомды емес.'}],benefits:['Қарапайымдылық','Деректер қажет емес','Нақты себепті табу','Қайталануды болдырмау']},
+    {id:'a3',icon:'📄',name:'A3 — Мәселені шешу',tag:'Құрылымдық ойлау',desc:'Мәселелерді шешу мен шешім қабылдауға арналған бір беттік формат',full:'A3 есебі — мәселелерді шешудің A3 форматындағы бір бетке сыятын құрылымдық тәсілі. Мәселені сипаттаудан іс-шаралар жоспарына дейін барлық кезеңдерді қамтиды.',steps:[{n:'1',t:'Фон / Мәтін',d:'Бұл мәселе неліктен маңызды? Ағымдағы жағдай қандай?'},{n:'2',t:'Ағымдағы жай',d:'Мәселе туралы фактілер мен деректер. Кестелер, диаграммалар.'},{n:'3',t:'Мақсатты жай',d:'Қалай болу керек? Нақты өлшенетін мақсат.'},{n:'4',t:'Себептерді талдау',d:'Түпкі себептерді іздеу үшін 5 Неліктен немесе Исикава.'},{n:'5',t:'Қарсы шаралар және жоспар',d:'Нақты іс-шаралар, мерзімдер, жауаптылар.'}],benefits:['Құрылымдық ойлау','Бір бет','Көрнекілік','Команданың қатысуы']},
+  ]
+};
+
+// ═══════════════════════════════════════════
+// DEFAULT CHECKLIST (5 аудитов)
+// ═══════════════════════════════════════════
+const DEF_CL={
+  ru:[
+    {id:'5s',name:'5S Аудит',color:'#1A56DB',icon:'🏭',sections:[
+      {s:'1S — Сортировка',items:['На рабочем месте нет ненужных предметов','Инструменты разделены на нужные и ненужные','Ненужные предметы помечены красными ярлыками','Определена зона для предметов с красными ярлыками','Красные ярлыки оформлены с датой и подписью']},
+      {s:'2S — Систематизация',items:['Каждый предмет имеет своё обозначенное место','Места хранения визуально обозначены (разметка, таблички)','Часто используемые предметы на расстоянии вытянутой руки','Инструменты расположены в порядке использования','Уровень запасов визуально обозначен (мин/макс)']},
+      {s:'3S — Уборка',items:['Рабочее место чистое, нет мусора и грязи','Оборудование регулярно чистится','Источники загрязнения выявлены и устранены','График уборки составлен и выполняется','Инструменты для уборки доступны и на своих местах']},
+      {s:'4S — Стандартизация',items:['Стандарты по 1S–3S задокументированы','Фотоэталоны «как должно быть» размещены','Сотрудники обучены стандартам','Ответственные за каждую зону назначены','Стандарты регулярно пересматриваются']},
+      {s:'5S — Совершенствование',items:['Аудиты 5S проводятся по графику','Результаты аудитов отображаются на доске','Корректирующие меры принимаются своевременно','Сотрудники вовлечены в улучшение','Положительная динамика аудитных баллов']},
+    ]},
+    {id:'kanban',name:'Канбан Аудит',color:'#059669',icon:'📋',sections:[
+      {s:'Визуализация и поток',items:['Канбан-доска актуальна и видна всей команде','Карточки содержат необходимую информацию (что, сколько, куда)','WIP-лимиты установлены и соблюдаются','Блокировки и проблемы визуально выделены','Поток движется слева направо без возвратов']},
+      {s:'Управление запасами',items:['Количество карточек соответствует нормативам','Нет карточек без движения более 2 дней','Сигнальные карточки обрабатываются своевременно','Запасы соответствуют установленным уровням (мин/макс)','Излишние запасы выявлены и устраняются']},
+      {s:'Дисциплина и улучшение',items:['Команда знает правила системы Канбан','Ретроспективы по улучшению потока проводятся регулярно','Время цикла и Lead Time отслеживаются','Узкие места в потоке выявлены и устраняются','Система адаптируется под изменения спроса']},
+    ]},
+    {id:'kaizen',name:'Кайдзен Аудит',color:'#7C3AED',icon:'🔄',sections:[
+      {s:'Кайдзен-предложения',items:['Система подачи предложений работает и доступна всем','Предложения обрабатываются в течение 7 дней','Процент реализованных предложений выше 50%','Авторы лучших предложений отмечаются','Количество предложений на сотрудника растёт']},
+      {s:'Кайдзен-мероприятия',items:['Кайдзен-блицы проводятся минимум 1 раз в квартал','Участвуют сотрудники разных уровней','Результаты кайдзен-блицов задокументированы','Экономический эффект рассчитан и подтверждён','Улучшения стандартизированы и не откатились']},
+      {s:'Культура улучшений',items:['Руководство активно поддерживает и участвует в Кайдзен','Проблемы воспринимаются как возможности, не как вина','Визуальные доски улучшений обновляются регулярно','Сотрудники знают принципы PDCA','Результаты улучшений видны и измеримы']},
+    ]},
+    {id:'tpm',name:'TPM Аудит',color:'#D97706',icon:'🔧',sections:[
+      {s:'Автономное обслуживание',items:['Операторы чистят и осматривают оборудование ежедневно','Чек-листы обслуживания заполняются регулярно','Отклонения выявляются и сообщаются своевременно','Операторы умеют выявлять ненормальное состояние машин','Инструменты для обслуживания доступны на рабочем месте']},
+      {s:'Плановое обслуживание',items:['График ТО разработан и соблюдается','Записи о техническом обслуживании ведутся','Время наработки на отказ (MTBF) измеряется и растёт','Время восстановления (MTTR) измеряется и снижается','Запасные части для критичного оборудования в наличии']},
+      {s:'Эффективность (OEE)',items:['OEE оборудования измеряется и отображается','Целевой OEE определён и известен команде','Основные потери (доступность, производительность, качество) идентифицированы','Мероприятия по повышению OEE реализуются','OEE демонстрирует положительную динамику']},
+    ]},
+    {id:'safety',name:'Аудит безопасности',color:'#DC2626',icon:'🦺',sections:[
+      {s:'Рабочее место и среда',items:['Проходы и эвакуационные выходы свободны','Полы без масляных пятен, трещин и препятствий','Освещение достаточное для безопасной работы','Электрические панели и кабели в исправном состоянии','Опасные зоны обозначены и ограждены']},
+      {s:'СИЗ и оборудование',items:['Сотрудники используют необходимые СИЗ','СИЗ соответствуют выполняемой работе','Защитные ограждения машин на месте и исправны','Огнетушители доступны, проверены, срок не истёк','Аптечки укомплектованы и доступны']},
+      {s:'Культура безопасности',items:['Инструктажи по безопасности проводятся регулярно','Несчастные случаи и инциденты фиксируются и расследуются','Ближние промахи («почти несчастный случай») сообщаются','Сотрудники знают план эвакуации','Показатели безопасности видны и обсуждаются на собраниях']},
+    ]},
+  ],
+  kz:[
+    {id:'5s',name:'5С Аудиті',color:'#1A56DB',icon:'🏭',sections:[
+      {s:'1С — Сұрыптау',items:['Жұмыс орнында қажетсіз заттар жоқ','Құралдар қажетті/қажетсіз деп бөлінген','Қажетсіз заттар қызыл жапсырмалармен белгіленген','Қызыл жапсырмалы заттарға арналған аймақ анықталған','Қызыл жапсырмаларда күн мен қол қою бар']},
+      {s:'2С — Жүйелеу',items:['Әр затқа белгіленген орны бар','Сақтау орындары визуалды белгіленген','Жиі қолданылатын заттар қол жетімді жерде','Құралдар қолдану тәртібіне сай орналастырылған','Қор деңгейі визуалды белгіленген (мин/макс)']},
+      {s:'3С — Тазалық',items:['Жұмыс орны таза, қоқыс пен кір жоқ','Жабдық жүйелі түрде тазаланады','Ластану көздері анықталып, жойылған','Тазалау кестесі жасалып, орындалуда','Тазалау құралдары қолжетімді және өз орнында']},
+      {s:'4С — Стандарттау',items:['1С–3С бойынша стандарттар құжатталған','«Қалай болу керек» фотоэталондары орналастырылған','Қызметкерлер стандарттармен таныс','Әр аймақ үшін жауапты тұлғалар тағайындалған','Стандарттар жүйелі түрде қайта қаралады']},
+      {s:'5С — Жетілдіру',items:['5С аудиттері кестеге сай жүргізіледі','Аудит нәтижелері тақтада көрсетіледі','Түзету шаралары уақытында қабылданады','Қызметкерлер 5С жетілдіруге қатысады','Аудит балдарының оң динамикасы байқалады']},
+    ]},
+    {id:'kanban',name:'Канбан Аудиті',color:'#059669',icon:'📋',sections:[
+      {s:'Визуализация және ағын',items:['Канбан тақтасы өзекті және бүкіл команда үшін көрінетін','Карталар қажетті ақпаратты қамтиды','WIP шектеулері белгіленген және сақталуда','Кедергілер мен мәселелер визуалды бөлектелген','Ағын солдан оңға кедергісіз жылжиды']},
+      {s:'Қорларды басқару',items:['Карталар саны нормативтерге сәйкес','2 күннен астам қозғалмаған карталар жоқ','Сигнал карталары уақытында өңделеді','Қорлар белгіленген деңгейлерге сәйкес','Артық қорлар анықталып, азайтылуда']},
+      {s:'Тәртіп және жетілдіру',items:['Команда Канбан жүйесінің ережелерін біледі','Ағынды жетілдіру ретроспективалары жүргізіледі','Цикл уақыты мен Lead Time бақыланады','Тар жерлер анықталып, жойылуда','Жүйе сұраныс өзгерістеріне бейімделеді']},
+    ]},
+    {id:'kaizen',name:'Кайдзен Аудиті',color:'#7C3AED',icon:'🔄',sections:[
+      {s:'Кайдзен ұсыныстары',items:['Ұсыныстар жүйесі жұмыс істейді және барлығына қолжетімді','Ұсыныстар 7 күн ішінде өңделеді','Жүзеге асырылған ұсыныстардың үлесі 50%-дан жоғары','Үздік ұсыныс авторлары марапатталады','Қызметкерге шаққандағы ұсыныс саны өсуде']},
+      {s:'Кайдзен шаралары',items:['Кайдзен-блицтер тоқсанда кем дегенде 1 рет өткізіледі','Әртүрлі деңгейдегі қызметкерлер қатысады','Кайдзен-блиц нәтижелері құжатталған','Экономикалық тиімділік есептеліп, расталған','Жетілдірулер стандартталып, кері оралмаған']},
+      {s:'Жетілдіру мәдениеті',items:['Басшылық Кайдзенді белсенді қолдайды','Мәсelelер кінә емес, мүмкіндік ретінде қабылданады','Жетілдіру тақталары жүйелі жаңартылады','Қызметкерлер PDCA принциптерін біледі','Жетілдіру нәтижелері көрінеді және өлшенеді']},
+    ]},
+    {id:'tpm',name:'ЖҚЖ Аудиті',color:'#D97706',icon:'🔧',sections:[
+      {s:'Дербес қызмет',items:['Операторлар жабдықты күн сайын тазалап, тексереді','Техникалық қызмет бет парақтары жүйелі толтырылады','Ауытқулар уақытында анықталып, хабарланады','Операторлар машиналардың қалыпсыз жағдайын анықтай алады','Техникалық қызмет құралдары жұмыс орнында қолжетімді']},
+      {s:'Жоспарлы техникалық қызмет',items:['ТҚ кестесі жасалып, сақталуда','Техникалық қызмет туралы жазбалар жүргізіледі','Іркілісіз жұмыс уақыты (MTBF) өлшенеді және өседі','Қалпына келтіру уақыты (MTTR) өлшенеді және азаяды','Маңызды жабдықтың қосалқы бөлшектері бар']},
+      {s:'Тиімділік (OEE)',items:['Жабдықтың OEE-і өлшеніп, көрсетілуде','Мақсатты OEE анықталған және команда біледі','Негізгі шығындар анықталған','OEE-ді жоғарылату шаралары жүзеге асырылуда','OEE оң динамика көрсетуде']},
+    ]},
+    {id:'safety',name:'Қауіпсіздік аудиті',color:'#DC2626',icon:'🦺',sections:[
+      {s:'Жұмыс орны мен орта',items:['Өтпежолдар мен эвакуациялық шығулар бос','Еденде май дақтары, жарықтар мен кедергілер жоқ','Жарықтандыру қауіпсіз жұмыс үшін жеткілікті','Электр қалқандары мен кабельдер жарамды күйде','Қауіпті аймақтар белгіленген және қоршалған']},
+      {s:'ЖҚҚ және жабдық',items:['Қызметкерлер қажетті ЖҚҚ пайдаланады','ЖҚҚ орындалатын жұмысқа сай','Машиналардың қорғаныш қоршаулары орнында және жарамды','Өрт сөндіргіштер қолжетімді, тексерілген, мерзімі аспаған','Дәрі-дәрмек жәшіктері жабдықталған және қолжетімді']},
+      {s:'Қауіпсіздік мәдениеті',items:['Қауіпсіздік инструктаждары жүйелі өткізіледі','Жазатайым оқиғалар тіркеліп, тексерілуде','«Почти жазатайым оқиғалар» хабарланады','Қызметкерлер эвакуация жоспарын біледі','Қауіпсіздік көрсеткіштері жиналыстарда талқыланады']},
+    ]},
+  ]
+};
+
+// ═══════════════════════════════════════════
+// QUIZ DATA (30 вопросов)
+// ═══════════════════════════════════════════
+const QUIZ={
+  ru:[
+    {q:'Что означает первый шаг системы 5S — «Сортировка»?',opts:['Расставить предметы по своим местам','Убрать с рабочего места всё лишнее, оставив только необходимое','Провести генеральную уборку'],c:1,e:'Сортировка (Seiri) — удалить все ненужные предметы с рабочего места.'},
+    {q:'Для чего в системе 5S используются «Красные ярлыки»?',opts:['Для маркировки опасных зон','Для обозначения предметов, по которым нужно принять решение','Для разметки пола'],c:1,e:'Красные ярлыки применяются при Сортировке для маркировки предметов: убрать, перенести или оставить.'},
+    {q:'Какой шаг 5S отвечает за долгосрочную дисциплину системы?',opts:['Сортировка (Seiri)','Стандартизация (Seiketsu)','Совершенствование (Shitsuke)'],c:2,e:'Совершенствование (Shitsuke) — формирование привычки и дисциплины соблюдать стандарты.'},
+    {q:'Как система 5S влияет на безопасность?',opts:['5S не связана с безопасностью','Чистое рабочее место снижает риск травм и аварий','5S влияет только на производительность'],c:1,e:'5S напрямую влияет на безопасность: устраняется захламлённость и лишние предметы.'},
+    {q:'Что означает «Кайдзен» (改善)?',opts:['Производственная система Toyota','Изменение к лучшему / непрерывное совершенствование','Устранение производственных потерь'],c:1,e:'Кайдзен дословно — «изменение к лучшему». Философия непрекращающегося улучшения.'},
+    {q:'Что означает шаг «A» (Act) в цикле PDCA?',opts:['Анализировать данные','Закрепить успешные изменения как стандарт или скорректировать план','Согласовать с руководством'],c:1,e:'Act — закрепить удачные изменения как стандарт или внести корректировки и повторить.'},
+    {q:'Кто должен участвовать в кайдзен-улучшениях?',opts:['Только руководство','Только консультанты по БП','Все сотрудники — от рабочих до менеджеров'],c:2,e:'Ключевой принцип Кайдзен — вовлечённость всех. Рабочие лучше знают проблемы.'},
+    {q:'Какой из 8 видов потерь считается самым опасным?',opts:['Дефекты','Перепроизводство','Ожидание'],c:1,e:'Перепроизводство — главный вид потерь: скрывает все остальные проблемы.'},
+    {q:'Лишние движения оператора — это какой вид потерь?',opts:['Транспортировка','Движение (Motion)','Ожидание'],c:1,e:'Движение (Motion) — потери от лишних движений людей: неудобное расположение инструментов.'},
+    {q:'"Нереализованный потенциал сотрудников" — это:',opts:['8-й вид потерь в современной трактовке БП','2-й вид потерь по классификации Тайити Оно','Не является видом потерь'],c:0,e:'Нереализованный потенциал — 8-й вид потерь, добавленный к классическим 7.'},
+    {q:'Что такое «Гемба»?',opts:['Система производственного планирования','Реальное место, где создаётся ценность','Метод решения проблем «5 почему»'],c:1,e:'Гемба — «реальное место». Менеджер должен выходить туда, где происходит работа.'},
+    {q:'Что такое «Такт-тайм»?',opts:['Время выполнения операции','Максимальное время производства единицы продукта, задаваемое спросом','Длительность рабочей смены'],c:1,e:'Такт-тайм = Доступное время / Количество заказов. «Пульс» производства.'},
+    {q:'Что такое VSM?',opts:['Метод оценки сотрудников','Карта потока создания ценности','Система складского учёта'],c:1,e:'VSM (Value Stream Mapping) — карта потока создания ценности.'},
+    {q:'Что показывает «Карта будущего состояния» в VSM?',opts:['Историю показателей','Идеальный поток после устранения потерь','Личные KPI сотрудников'],c:1,e:'Карта будущего — проект идеального потока. Основа плана улучшений.'},
+    {q:'Что такое «Lead Time» в VSM?',opts:['Время одной операции','Полное время от сырья до получения продукта потребителем','Длительность смены'],c:1,e:'Lead Time — полный цикл от материала до потребителя. Сокращение — главная цель VSM.'},
+    {q:'Что такое TPM?',opts:['Система тотального контроля качества','Система вовлечения всего персонала в обслуживание оборудования','Метод планирования производства'],c:1,e:'TPM (Total Productive Maintenance) — система, при которой каждый оператор отвечает за своё оборудование.'},
+    {q:'Что измеряет OEE в TPM?',opts:['Загрузку персонала','Общую эффективность оборудования (доступность × производительность × качество)','Количество произведённой продукции'],c:1,e:'OEE = Доступность × Производительность × Качество. Мировой стандарт — 85%.'},
+    {q:'Что такое SMED?',opts:['Метод решения проблем','Система сокращения времени переналадки оборудования','Способ организации рабочего места'],c:1,e:'SMED — Single Minute Exchange of Die. Цель: сократить переналадку до менее 10 минут.'},
+    {q:'На чём основан метод SMED?',opts:['Разделении операций на внутренние (при остановке) и внешние (во время работы)','Полной автоматизации переналадки','Увеличении числа операторов при переналадке'],c:0,e:'SMED разделяет операции: внутренние — только при остановке, внешние — можно делать заранее.'},
+    {q:'Что такое метод «5 Почему»?',opts:['Правило пяти шагов по 5S','Инструмент поиска корневой причины путём последовательных вопросов','Пять критериев качества продукта'],c:1,e:'«5 Почему» — задавая вопрос «Почему?» 5 раз, находишь настоящую причину проблемы.'},
+    {q:'Что такое «Пока-ёкэ»?',opts:['Система визуализации','Устройство или метод, физически предотвращающий ошибку','Техника совещаний'],c:1,e:'Пока-ёкэ — «защита от ошибок». Делает физически невозможным допустить ошибку.'},
+    {q:'Что такое формат A3?',opts:['Размер бумаги','Одностраничный структурированный отчёт для решения проблем','Метод планирования на 3 года'],c:1,e:'Отчёт A3 — все этапы решения проблемы на одном листе формата A3.'},
+    {q:'Главная идея системы Канбан?',opts:['Производить как можно больше','Производить только то, что нужно, когда нужно','Автоматизировать всё'],c:1,e:'Канбан — система вытягивания: производится только то, что реально нужно.'},
+    {q:'Что такое «Андон»?',opts:['Вид упаковки','Визуальная или звуковая сигнализация о проблемах на производстве','Инструмент разметки пола'],c:1,e:'Андон — сигнализация о проблемах на линии. Любой может остановить производство.'},
+    {q:'Сколько видов потерь (Муда) в современной трактовке БП?',opts:['5','7','8'],c:2,e:'8 видов: транспортировка, запасы, движение, ожидание, перепроизводство, дефекты, излишняя обработка, нереализованный потенциал.'},
+    {q:'С чего начинается построение карты VSM?',opts:['С рисования будущего состояния','С выбора продукта и картирования текущего состояния на Гемба','С расчёта такт-тайма'],c:1,e:'VSM начинается с выбора продукта, затем команда идёт на Гемба и рисует текущее состояние.'},
+    {q:'Что такое «Джидока»?',opts:['Полная автоматизация без людей','Автоматизация с человеческим интеллектом: оборудование останавливается при дефекте','Система обучения персонала'],c:1,e:'Джидока — «умная автоматизация». Оборудование само обнаруживает отклонения и останавливается.'},
+    {q:'Что означает аббревиатура JIT?',opts:['Japan Industrial Technology','Just-in-Time — точно в срок','Joint Improvement Team'],c:1,e:'JIT — «точно в срок». Производство и поставка ровно тогда и столько, сколько нужно.'},
+    {q:'Что такое «Хейдзунка»?',opts:['Метод устранения дефектов','Выравнивание производства по объёму и ассортименту','Система складского учёта'],c:1,e:'Хейдзунка — равномерное распределение объёмов и ассортимента. Устраняет пиковые нагрузки.'},
+    {q:'Чем отличается Кайдзен от разовых улучшений?',opts:['Кайдзен — дорогостоящие изменения раз в год','Кайдзен — непрерывный поток маленьких улучшений каждый день','Кайдзен применяется только в Японии'],c:1,e:'Кайдзен — культура ежедневных небольших улучшений. Даже 2 секунды экономии × тысячи операций = большой эффект.'},
+  ],
+  kz:[
+    {q:'5С жүйесінің «Сұрыптау» қадамы нені білдіреді?',opts:['Заттарды өз орнына қою','Жұмыс орнынан барлық қажетсізді алып тастау','Жалпы тазалық жүргізу'],c:1,e:'Сұрыптау (Seiri) — жұмыс орнынан барлық қажетсіз заттарды алып тастау.'},
+    {q:'5С жүйесінде «Қызыл жапсырмалар» не үшін қолданылады?',opts:['Қауіпті аймақтарды белгілеу','Шешім қабылдау керек заттарды белгілеу','Еден разметкасы'],c:1,e:'Қызыл жапсырмалар Сұрыптауда қолданылады: алып тастау, ауыстыру немесе қалдыру.'},
+    {q:'5С жүйесінің ұзақ мерзімді тәртібін қамтитын қадам?',opts:['Сұрыптау (Seiri)','Стандарттау (Seiketsu)','Жетілдіру (Shitsuke)'],c:2,e:'Жетілдіру (Shitsuke) — стандарттарды сақтау дағдысы мен тәртіпті қалыптастыру.'},
+    {q:'5С жүйесі қауіпсіздікке қалай әсер етеді?',opts:['5С қауіпсіздікке қатысы жоқ','Таза жұмыс орны жарақат алу қаупін азайтады','5С тек өнімділікке әсер етеді'],c:1,e:'5С қауіпсіздікке тікелей әсер етеді: захламлённость пен артық заттар жойылады.'},
+    {q:'«Кайдзен» (改善) нені білдіреді?',opts:['Toyota өндіріс жүйесі','Жақсы жаққа өзгеру / үздіксіз жетілдіру','Өндіріс шығындарын жою'],c:1,e:'Кайдзен сөзбе-сөз «жақсы жаққа өзгеру». Үздіксіз жетілдіру философиясы.'},
+    {q:'PDCA циклінде «A» — Act қадамы нені білдіреді?',opts:['Деректерді талдау','Сәтті өзгерістерді стандарт ретінде бекіту немесе жоспарды түзету','Басшылықпен келісу'],c:1,e:'Act — сәтті өзгерістерді стандарт ретінде бекіту немесе түзетулер енгізіп, қайталау.'},
+    {q:'Кайдзен жетілдіруге кім қатысуы керек?',opts:['Тек басшылық','Тек кеңесшілер','Барлық қызметкерлер'],c:2,e:'Кайдзеннің негізгі принципі — барлығының қатысуы.'},
+    {q:'8 шығын түрінің ішінде ең қауіптісі?',opts:['Ақаулар','Артық өндіріс','Күту'],c:1,e:'Артық өндіріс — барлық басқа мәсelelерді жасырады.'},
+    {q:'Операторлардың артық қозғалысы қандай шығын?',opts:['Тасымалдау','Қозғалыс (Motion)','Күту'],c:1,e:'Қозғалыс (Motion) — адамдардың артық қозғалысынан болатын шығын.'},
+    {q:'«Іске асырылмаған қызметкер әлеуеті» бұл:',opts:['БП-да сегізінші шығын түрі','Екінші шығын түрі','Шығын түрі болып саналмайды'],c:0,e:'Іске асырылмаған әлеует — классикалық 7 түрге қосылған 8-ші шығын.'},
+    {q:'«Гемба» дегеніміз не?',opts:['Өндірісті жоспарлау жүйесі','Құндылық жасалатын нақты орын','«5 Неліктен» әдісі'],c:1,e:'Гемба — «нақты орын». Менеджер жұмыс болып жатқан жерге тікелей шығуы керек.'},
+    {q:'«Такт-тайм» дегеніміз не?',opts:['Операцияны орындау уақыты','Тұтынушы сұранысы белгілейтін бір өнімді өндіруге рұқсат берілген уақыт','Жұмыс ауысымының ұзақтығы'],c:1,e:'Такт-тайм = Қолжетімді уақыт / Тапсырыс саны. Өндірістің «пульсі».'},
+    {q:'VSM дегеніміз не?',opts:['Қызметкерлерді бағалау','Құн жасау ағынының картасы','Қойма есебі жүйесі'],c:1,e:'VSM (Value Stream Mapping) — құн жасау ағынының картасы.'},
+    {q:'VSM-дегі «Болашақ жай картасы» нені көрсетеді?',opts:['Көрсеткіштер тарихы','Шығындар жойылғаннан кейінгі идеалды ағын','Қызметкерлердің жеке KPI жоспары'],c:1,e:'Болашақ жай картасы — идеалды ағын жобасы. Жетілдіру жоспарының негізі.'},
+    {q:'VSM-дегі «Lead Time» дегеніміз не?',opts:['Бір операцияның уақыты','Шикізаттан дайын өнімді тұтынушыға жеткізгенге дейінгі толық уақыт','Ауысым ұзақтығы'],c:1,e:'Lead Time — материалдан тұтынушыға дейінгі толық цикл.'},
+    {q:'ЖҚЖ (TPM) дегеніміз не?',opts:['Тотальды сапаны бақылау жүйесі','Барлық персоналды жабдыққа күтімге тарту жүйесі','Өндірісті жоспарлау әдісі'],c:1,e:'TPM — әр оператор өз жабдығына жауапты болатын жүйе.'},
+    {q:'ЖҚЖ-да OEE нені өлшейді?',opts:['Персонал жүктемесі','Жабдықтың жалпы тиімділігі (қолжетімділік × өнімділік × сапа)','Өндірілген өнім саны'],c:1,e:'OEE = Қолжетімділік × Өнімділік × Сапа. Әлемдік стандарт — 85%.'},
+    {q:'SMED дегеніміз не?',opts:['Мәселені шешу әдісі','Жабдықты қайта баптау уақытын қысқарту жүйесі','Жұмыс орнын ұйымдастыру'],c:1,e:'SMED — Single Minute Exchange of Die. Мақсат: қайта баптауды 10 минуттан аз ету.'},
+    {q:'SMED қандай принципке негізделген?',opts:['Операцияларды ішкі (тоқтатылғанда) және сыртқы (жұмыс кезінде) деп бөлуге','Қайта баптауды толық автоматтандыруға','Операторлар санын арттыруға'],c:0,e:'SMED: ішкі операциялар — тоқтатылғанда, сыртқы — алдын ала орындалады.'},
+    {q:'«5 Неліктен» әдісі дегеніміз не?',opts:['5С бойынша бес қадам ережесі','Дәйекті сұрақтар арқылы мәселенің түпкі себебін табу','Өнім сапасының бес өлшемі'],c:1,e:'«5 Неліктен» — «Неліктен?» деп 5 рет сұрай отырып, нақты себепті табасың.'},
+    {q:'«Пока-ёкэ» дегеніміз не?',opts:['Визуализация жүйесі','Қателікті физикалық тұрғыдан болдырмайтын құрылғы немесе әдіс','Кеңестер жүргізу техникасы'],c:1,e:'Пока-ёкэ — «қателіктен қорғану». Қате жіберуді мүмкін емес етеді.'},
+    {q:'A3 форматы дегеніміз не?',opts:['Қағаз өлшемі','Мәселелерді шешуге арналған бір беттік құрылымдық есеп','3 жылға жоспарлау әдісі'],c:1,e:'A3 есебі — мәселені шешудің барлық кезеңдері бір A3 бетінде.'},
+    {q:'Канбан жүйесінің негізгі идеясы?',opts:['Мүмкіндігінше көп өндіру','Тек қажет кезде, қажет мөлшерде өндіру','Барлығын автоматтандыру'],c:1,e:'Канбан — тарту жүйесі: нақты қажет болғанда ғана өндіріледі.'},
+    {q:'«Андон» дегеніміз не?',opts:['Орауыш түрі','Өндірістегі мәсelelер туралы визуалды немесе дыбыстық сигнал жүйесі','Еден разметкасы'],c:1,e:'Андон — желідегі мәсelelер туралы сигнализация. Кез келген өндірісті тоқтата алады.'},
+    {q:'Қазіргі БП-да қанша шығын түрі бар?',opts:['5','7','8'],c:2,e:'8 түрі: тасымалдау, қорлар, қозғалыс, күту, артық өндіріс, ақаулар, артық өңдеу, іске асырылмаған әлеует.'},
+    {q:'VSM картасын құру қайдан басталады?',opts:['Болашақ жайды сызудан','Өнімді таңдаудан және Гембаға барып ағымдағы жайды картаға түсіруден','Такт-тайм есебінен'],c:1,e:'VSM өнімді таңдаудан басталады, командa Гембаға барып ағымдағы жайды сызады.'},
+    {q:'«Джидока» дегеніміз не?',opts:['Адамдарсыз толық автоматтандыру','Адами интеллект бар автоматтандыру: ақау кезінде жабдық тоқтайды','Персоналды оқыту жүйесі'],c:1,e:'Джидока — «ақылды автоматтандыру». Жабдық ауытқуларды өздігінен анықтап тоқтайды.'},
+    {q:'JIT аббревиатурасы нені білдіреді?',opts:['Japan Industrial Technology','Just-in-Time — дәл уақытында','Joint Improvement Team'],c:1,e:'JIT — «дәл уақытында». Өндіру және жеткізу нақты қажет болғанда ғана.'},
+    {q:'«Хейдзунка» дегеніміз не?',opts:['Ақауларды жою әдісі','Өндірісті көлем мен ассортимент бойынша теңестіру','Қойма есебі жүйесі'],c:1,e:'Хейдзунка — өндірісті теңестіру. Шыңдық жүктемелерді жояды.'},
+    {q:'Кайдзеннің бір реттік жетілдіруден айырмашылығы?',opts:['Кайдзен — жылына бір рет ірі өзгерістер','Кайдзен — күн сайынғы шағын жетілдірулердің үздіксіз ағыны','Кайдзен тек Жапонияда қолданылады'],c:1,e:'Кайдзен — ежелdenгі шағын жетілдірулер мәдениеті. 2 секунд × мыңдаған операция = үлкен нәтиже.'},
+  ]
+};
+
+// ═══════════════════════════════════════════
+// BOOKS & GLOSSARY
+// ═══════════════════════════════════════════
+const BOOKS=[
+  {emoji:'📘',title:{ru:'2 Second Lean',kz:'2 Second Lean'},author:'Пол Акерс',year:2011,level:'beg',free:true,desc:{ru:'Простая книга о внедрении Lean. Бесплатно в PDF и аудио.',kz:'Lean енгізу туралы қарапайым кітап. PDF және аудио форматта тегін.'},link:'https://paulakers.net/books/2-second-lean'},
+  {emoji:'📙',title:{ru:'Дао Toyota: 14 принципов менеджмента',kz:'Toyota Жолы: менеджменттің 14 принципі'},author:'Джеффри Лайкер',year:2004,level:'adv',free:false,desc:{ru:'Фундаментальная книга о производственной системе Toyota.',kz:'Toyota өндіріс жүйесі туралы іргелі кітап.'},link:'https://www.litres.ru/book/dzheffri-layker/dao-toyota-14-principov-menedzhmenta-veduschey-kompanii-2956943/'},
+  {emoji:'📗',title:{ru:'Бережливое производство',kz:'Үнемді өндіріс'},author:'Джеймс Вомак, Дэниел Джонс',year:1996,level:'mid',free:false,desc:{ru:'Классика — авторы ввели термин «Lean».',kz:'Классика — авторлар «Lean» терминін енгізді.'},link:'https://www.litres.ru/book/dzheyms-vomak/berezhlivoe-proizvodstvo-6943947/'},
+  {emoji:'📕',title:{ru:'Гемба Кайдзен',kz:'Гемба Кайдзен'},author:'Масааки Имаи',year:1997,level:'mid',free:false,desc:{ru:'Кайдзен на рабочем месте. Практические примеры улучшений на производстве.',kz:'Жұмыс орнындағы Кайдзен. Практикалық мысалдар.'},link:'https://www.litres.ru/book/masaaki-imai/gemba-kaydzen-put-k-snizheniyu-zatrat-i-povysheniyu-kachestva-6601088/'},
+  {emoji:'📓',title:{ru:'Учитесь видеть бизнес-процессы (VSM)',kz:'Бизнес-процестерді көруді үйреніңіз (VSM)'},author:'Майк Ротер, Джон Шук',year:1998,level:'mid',free:false,desc:{ru:'Практическое руководство по построению карты потока VSM.',kz:'VSM картасын құруға арналған практикалық нұсқаулық.'},link:'https://www.ozon.ru/search/?text=учитесь+видеть+бизнес-процессы'},
+  {emoji:'📒',title:{ru:'Производство без потерь для рабочих',kz:'Жұмысшылар үшін шығынсыз өндіріс'},author:'Институт Lean Enterprise (LEI)',year:2006,level:'beg',free:false,desc:{ru:'Простое объяснение БП для производственного персонала.',kz:'Өндірістік персонал үшін үнемді өндіріс принциптерінің қарапайым түсіндірмесі.'},link:'https://www.ozon.ru/search/?text=бережливое+производство+для+рабочих'},
+];
+const GLOSSARY=[
+  {term:'Муда (Muda)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Любые потери — деятельность, потребляющая ресурсы, но не создающая ценности.',kz:'Кез келген шығын — ресурстарды тұтынатын, бірақ құндылық тудырмайтын іс-әрекет.'}},
+  {term:'Кайдзен (Kaizen)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Философия непрерывного совершенствования. «Изменение к лучшему».',kz:'Үздіксіз жетілдіру философиясы. «Жақсы жаққа өзгеру».'}},
+  {term:'5S / 5С',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Сортировка, Систематизация, Содержание в чистоте, Стандартизация, Совершенствование.',kz:'Сұрыптау, Жүйелеу, Тазалық, Стандарттау, Жетілдіру.'}},
+  {term:'Канбан (Kanban)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Визуальная система управления потоком производства. «Карточка».',kz:'Өндіріс ағынын басқарудың визуалды жүйесі. «Карточка».'}},
+  {term:'VSM',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Value Stream Mapping — карта потока создания ценности.',kz:'Value Stream Mapping — құн жасау ағынының картасы.'}},
+  {term:'TPM',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Total Productive Maintenance — всеобщее обслуживание оборудования. Вовлечение всего персонала.',kz:'Total Productive Maintenance — жалпы жабдыққа қызмет. Барлық персоналды тарту.'}},
+  {term:'SMED',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Single Minute Exchange of Die — система сокращения переналадки до менее 10 минут.',kz:'Single Minute Exchange of Die — қайта баптауды 10 минуттан аз ету жүйесі.'}},
+  {term:'OEE',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Overall Equipment Effectiveness — коэффициент общей эффективности оборудования. OEE = Доступность × Производительность × Качество.',kz:'Overall Equipment Effectiveness — жабдықтың жалпы тиімділік коэффициенті. OEE = Қолжетімділік × Өнімділік × Сапа.'}},
+  {term:'Гемба (Gemba)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'«Реальное место» — место, где создаётся ценность.',kz:'«Нақты орын» — құндылық жасалатын орын.'}},
+  {term:'Джидока (Jidoka)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Автоматизация с человеческим интеллектом. Остановка при дефекте.',kz:'Адами интеллект бар автоматтандыру. Ақау кезінде тоқтату.'}},
+  {term:'Пока-ёкэ (Poka-yoke)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Защита от ошибок. Решения, исключающие возможность ошибки.',kz:'Қателіктен қорғану. Қате жіберуді болдырмайтын шешімдер.'}},
+  {term:'Такт-тайм (Takt time)',orig:'🇩🇪 Немецкий / Неміс тілі',def:{ru:'Ритм производства, задаваемый потребителем.',kz:'Тұтынушы берген өндіріс ырғағы.'}},
+  {term:'Андон (Andon)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Визуальная сигнализация о проблемах на производстве.',kz:'Өндірістегі мәселeler туралы визуалды сигнал жүйесі.'}},
+  {term:'JIT (Just-in-Time)',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Точно в срок. Поставка ровно тогда, когда нужно.',kz:'Дәл уақытында. Нақты қажет болғанда жеткізу.'}},
+  {term:'Хейдзунка (Heijunka)',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Выравнивание производства по объёму и ассортименту.',kz:'Өндірісті көлем мен ассортимент бойынша теңестіру.'}},
+  {term:'5 Почему / 5 Неліктен',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Метод поиска корневой причины: задавать «Почему?» 5 раз подряд.',kz:'Түпкі себепті табу әдісі: «Неліктен?» деп 5 рет қатарынан сұрау.'}},
+  {term:'A3',orig:'🇯🇵 Японский / Жапон тілі',def:{ru:'Одностраничный структурированный отчёт для решения проблем на листе формата A3.',kz:'Мәсelelерді шешуге арналған A3 форматындағы бір беттік құрылымдық есеп.'}},
+  {term:'PDCA',orig:'🇬🇧 Английский / Ағылшын тілі',def:{ru:'Plan-Do-Check-Act — цикл непрерывного улучшения Деминга.',kz:'Plan-Do-Check-Act — Деминг үздіксіз жетілдіру циклі.'}},
+];
+const KPI_DEF=[
+  {id:'waste',icon:'📉',unit:'%',label:{ru:'Снижение потерь',kz:'Шығынның азаюы'}},
+  {id:'prod',icon:'📈',unit:'%',label:{ru:'Рост производительности',kz:'Өнімділіктің өсуі'}},
+  {id:'def',icon:'✅',unit:'%',label:{ru:'Снижение дефектов',kz:'Ақаулардың азаюы'}},
+  {id:'sav',icon:'💰',unit:'₸',label:{ru:'Экономия (тенге)',kz:'Үнемделу (теңге)'}},
+  {id:'prj',icon:'🏆',unit:'шт',label:{ru:'Реализовано проектов',kz:'Жүзеге асырылған жобалар'}},
+  {id:'ideas',icon:'💡',unit:'шт',label:{ru:'Кайдзен-предложений',kz:'Кайдзен-ұсыныстар'}},
+];
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let lang='ru', curPage='theory', curDetail=null;
+let qIdx=0, qScore=0, qAnswered=false;
+let clState=gd('cl_state',{}), glFilter='', curAudit='5s';
+let admLang='ru', admToolLang='ru', admToolId='5s';
+function loadRes(){return{company:DB.get('co')||'',kpis:gd('kpis',{}),projects:gd('pj',[{id:1,name:'',before:'',after:'',effect:''}])};}
+let RES=loadRes();
+// Admin state
+let adminLoggedIn=false, tapCount=0, tapTimer=null;
+
+// ═══════════════════════════════════════════
+// ADMIN ACCESS
+// ═══════════════════════════════════════════
+function adminTap(){
+  tapCount++;
+  clearTimeout(tapTimer);
+  tapTimer=setTimeout(()=>tapCount=0,2000);
+  if(tapCount>=7) openAdmin();
+}
+function openAdmin(){
+  document.getElementById('adminOv').classList.add('show');
+  if(!adminLoggedIn){document.getElementById('adminLogin').style.display='block';document.getElementById('adminPanel').style.display='none';}
+  else showAdminPanel();
+}
+function closeAdmin(){document.getElementById('adminOv').classList.remove('show');}
+function checkPass(){
+  const inp=document.getElementById('passInp');
+  const stored=DB.get('adminpass')||'lean2025';
+  if(inp.value===stored){adminLoggedIn=true;document.getElementById('passErr').style.display='none';inp.value='';showAdminPanel();}
+  else{document.getElementById('passErr').style.display='block';inp.value='';}
+}
+function showAdminPanel(){
+  document.getElementById('adminLogin').style.display='none';
+  document.getElementById('adminPanel').style.display='flex';
+  renderAdmCl(); renderAdmToolSelector(); renderAdmTool(admToolId);
+  renderAdmSettings();
+}
+function switchAdmTab(name,btn){
+  document.querySelectorAll('.adm-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.adm-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('adm-'+name).classList.add('active');
+}
+
+// ═══════════════════════════════════════════
+// ADMIN — CHECKLIST EDITOR
+// ═══════════════════════════════════════════
+function setAdmLang(l,btn){
+  admLang=l;
+  document.querySelectorAll('#adm-cl .ls-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdmCl();
+}
+function getClData(l){return gd('cl_'+l,DEF_CL[l]);}
+function saveClData(l,data){DB.set('cl_'+l,data);}
+
+function renderAdmCl(){
+  const data=getClData(admLang);
+  const body=document.getElementById('admClBody');
+  body.innerHTML=data.map((audit,ai)=>`
+    <div class="adm-section" style="border-left:4px solid ${audit.color}">
+      <div class="adm-sec-hdr">
+        <span class="adm-sec-title">${audit.icon} ${audit.name}</span>
+      </div>
+      ${audit.sections.map((sec,si)=>`
+        <div style="border-bottom:1px solid var(--br)">
+          <div style="padding:8px 14px 6px;display:flex;align-items:center;gap:8px;background:var(--bg)">
+            <input class="adm-inp" style="font-weight:700" value="${esc(sec.s)}" onchange="updateSecTitle(${ai},${si},this.value)" />
+          </div>
+          ${sec.items.map((item,ii)=>`
+            <div class="adm-item-row">
+              <input class="adm-inp" value="${esc(item)}" onchange="updateClItem(${ai},${si},${ii},this.value)" />
+              <button class="adm-del" onclick="delClItem(${ai},${si},${ii})">✕</button>
+            </div>`).join('')}
+          <div class="adm-add">
+            <input class="adm-add-inp" id="ni-${ai}-${si}" placeholder="${admLang==='ru'?'Новый пункт...':'Жаңа тармақ...'}" onkeydown="if(event.key==='Enter')addClItem(${ai},${si})"/>
+            <button class="adm-add-btn" onclick="addClItem(${ai},${si})">${admLang==='ru'?'+ Добавить':'+ Қосу'}</button>
+          </div>
+        </div>`).join('')}
+    </div>`).join('');
+}
+function esc(s){return (s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');}
+function updateSecTitle(ai,si,val){const d=getClData(admLang);d[ai].sections[si].s=val;saveClData(admLang,d);}
+function updateClItem(ai,si,ii,val){const d=getClData(admLang);d[ai].sections[si].items[ii]=val;saveClData(admLang,d);if(curPage==='checklist')renderCL();}
+function delClItem(ai,si,ii){const d=getClData(admLang);d[ai].sections[si].items.splice(ii,1);saveClData(admLang,d);renderAdmCl();if(curPage==='checklist')renderCL();}
+function addClItem(ai,si){
+  const inp=document.getElementById(`ni-${ai}-${si}`);
+  if(!inp.value.trim()) return;
+  const d=getClData(admLang);
+  d[ai].sections[si].items.push(inp.value.trim());
+  saveClData(admLang,d); inp.value='';
+  renderAdmCl();if(curPage==='checklist')renderCL();
+}
+
+// ═══════════════════════════════════════════
+// ADMIN — TOOLS EDITOR
+// ═══════════════════════════════════════════
+function setAdmToolLang(l,btn){
+  admToolLang=l;
+  document.querySelectorAll('#adm-tools .ls-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdmToolSelector();renderAdmTool(admToolId);
+}
+function getToolsData(l){return gd('tools_'+l,DEF_TOOLS[l]);}
+function saveToolsData(l,data){DB.set('tools_'+l,data);}
+
+function renderAdmToolSelector(){
+  const tools=getToolsData(admToolLang);
+  document.getElementById('admToolSelector').innerHTML=`<div style="display:flex;flex-wrap:wrap;gap:6px">`+
+    tools.map(t=>`<button onclick="selectAdmTool('${t.id}')" style="padding:6px 12px;border-radius:8px;border:1.5px solid ${admToolId===t.id?'var(--a)':'var(--br)'};background:${admToolId===t.id?'var(--al)':'var(--w)'};font-family:Inter,sans-serif;font-size:12px;font-weight:700;cursor:pointer;color:${admToolId===t.id?'var(--a)':'var(--t2)'}">${t.icon} ${t.name}</button>`).join('')+`</div>`;
+}
+function selectAdmTool(id){admToolId=id;renderAdmToolSelector();renderAdmTool(id);}
+function renderAdmTool(id){
+  const tools=getToolsData(admToolLang);
+  const tool=tools.find(t=>t.id===id);
+  if(!tool){document.getElementById('admToolBody').innerHTML='';return;}
+  const idx=tools.findIndex(t=>t.id===id);
+  const l=admToolLang;
+  document.getElementById('admToolBody').innerHTML=`
+    <div class="tool-edit-card">
+      <div class="tool-edit-label">Название</div>
+      <input class="tool-edit-inp" value="${esc(tool.name)}" onchange="updateToolField(${idx},'name',this.value,'${l}')"/>
+      <div class="tool-edit-label">Тег / категория</div>
+      <input class="tool-edit-inp" value="${esc(tool.tag)}" onchange="updateToolField(${idx},'tag',this.value,'${l}')"/>
+      <div class="tool-edit-label">Краткое описание</div>
+      <textarea class="tool-edit-ta" onchange="updateToolField(${idx},'desc',this.value,'${l}')">${tool.desc||''}</textarea>
+      <div class="tool-edit-label">Полное описание</div>
+      <textarea class="tool-edit-ta" style="min-height:80px" onchange="updateToolField(${idx},'full',this.value,'${l}')">${tool.full||''}</textarea>
+      <div class="tool-edit-label">Шаги (каждый через ↵)</div>
+      ${tool.steps.map((s,si)=>`
+        <div style="display:flex;gap:6px;margin-bottom:6px;align-items:flex-start">
+          <div style="min-width:28px;height:28px;background:var(--a);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:6px;flex-shrink:0">${s.n}</div>
+          <div style="flex:1">
+            <input class="tool-edit-inp" style="margin-bottom:4px" value="${esc(s.t)}" onchange="updateStep(${idx},${si},'t',this.value,'${l}')"/>
+            <input class="tool-edit-inp" style="margin-bottom:0" value="${esc(s.d)}" onchange="updateStep(${idx},${si},'d',this.value,'${l}')"/>
+          </div>
+        </div>`).join('')}
+      <div class="tool-edit-label" style="margin-top:8px">Результаты (выгоды)</div>
+      ${tool.benefits.map((b,bi)=>`
+        <div style="display:flex;gap:6px;margin-bottom:6px">
+          <input class="tool-edit-inp" style="margin-bottom:0" value="${esc(b)}" onchange="updateBenefit(${idx},${bi},this.value,'${l}')"/>
+          <button class="adm-del" onclick="delBenefit(${idx},${bi},'${l}')">✕</button>
+        </div>`).join('')}
+      <button class="adm-add-btn" onclick="addBenefit(${idx},'${l}')">+ ${l==='ru'?'Добавить результат':'Нәтиже қосу'}</button>
+    </div>
+    <button class="btn-pri" onclick="saveToolsMsg('${l}')">✓ Сохранить изменения</button>
+    <div id="toolSaveMsg" style="font-size:12px;color:var(--g);margin-top:8px;display:none">Сохранено!</div>`;
+}
+function updateToolField(idx,field,val,l){const d=getToolsData(l);d[idx][field]=val;saveToolsData(l,d);if(curPage==='theory')renderTools();}
+function updateStep(idx,si,field,val,l){const d=getToolsData(l);d[idx].steps[si][field]=val;saveToolsData(l,d);}
+function updateBenefit(idx,bi,val,l){const d=getToolsData(l);d[idx].benefits[bi]=val;saveToolsData(l,d);}
+function delBenefit(idx,bi,l){const d=getToolsData(l);d[idx].benefits.splice(bi,1);saveToolsData(l,d);renderAdmTool(admToolId);}
+function addBenefit(idx,l){const d=getToolsData(l);d[idx].benefits.push('');saveToolsData(l,d);renderAdmTool(admToolId);}
+function saveToolsMsg(l){
+  const m=document.getElementById('toolSaveMsg');
+  m.style.display='block';
+  setTimeout(()=>m.style.display='none',2000);
+  if(curPage==='theory')renderTools();
+}
+
+// ═══════════════════════════════════════════
+// ADMIN — SETTINGS
+// ═══════════════════════════════════════════
+function renderAdmSettings(){
+  const sz=DB.size();
+  document.getElementById('dataInfo').innerHTML=`📦 Занято в браузере: <b>${sz} КБ</b><br>Инструменты: ${DB.get('tools_ru')?'✅ изменены':'📋 по умолчанию'}<br>Чек-лист RU: ${DB.get('cl_ru')?'✅ изменён':'📋 по умолчанию'}<br>Чек-лист ҚЗ: ${DB.get('cl_kz')?'✅ изменён':'📋 по умолчанию'}`;
+}
+function changePass(){
+  const p1=document.getElementById('newPass1').value;
+  const p2=document.getElementById('newPass2').value;
+  const err=document.getElementById('passChangeErr');
+  if(!p1){err.style.display='block';err.textContent='Введите пароль';return;}
+  if(p1!==p2){err.style.display='block';err.textContent='Пароли не совпадают';return;}
+  DB.set('adminpass',p1);
+  err.style.display='block';err.style.color='var(--g)';err.textContent='Пароль изменён!';
+  document.getElementById('newPass1').value='';document.getElementById('newPass2').value='';
+  setTimeout(()=>{err.style.display='none';err.style.color='var(--r)';},2000);
+}
+function resetAllData(){
+  if(!confirm('Сбросить ВСЕ изменения в инструментах и чек-листах к настройкам по умолчанию?')) return;
+  ['tools_ru','tools_kz','cl_ru','cl_kz'].forEach(k=>DB.del(k));
+  renderAdmSettings();
+  if(curPage==='theory')renderTools();
+  if(curPage==='checklist')renderCL();
+  alert('Данные сброшены к настройкам по умолчанию');
+}
+
+// ═══════════════════════════════════════════
+// LANG
+// ═══════════════════════════════════════════
+function setLang(l){
+  lang=l;
+  document.querySelectorAll('.lb').forEach(b=>b.classList.toggle('active',b.textContent===l.toUpperCase()));
+  applyT(); renderCur();
+}
+function applyT(){
+  const t=T[lang];
+  document.getElementById('appTitle').textContent=t.appTitle;
+  document.getElementById('lb-tools').textContent=t.lbTools;
+  document.getElementById('lb-back').textContent=t.lbBack;
+  document.getElementById('lb-quiz').textContent=t.lbQuiz;
+  document.getElementById('lb-cllabel').textContent=t.lbCllabel;
+  document.getElementById('lb-reset').textContent='↺ '+(lang==='ru'?'Сброс':'Қалпына');
+  document.getElementById('lb-kpi').textContent=t.lbKpi;
+  document.getElementById('lb-proj').textContent=t.lbProj;
+  document.getElementById('lb-addproj').textContent=t.lbAddproj;
+  document.getElementById('lb-lit').textContent=t.lbLit;
+  document.getElementById('lb-savenote').textContent=t.lbSavenote;
+  document.getElementById('srch').placeholder=t.srchPh;
+  document.getElementById('companyName').placeholder=t.coPh;
+  t.nav.forEach((n,i)=>document.getElementById('n'+(i+1)).textContent=n);
+}
+
+// ═══════════════════════════════════════════
+// PAGES
+// ═══════════════════════════════════════════
+function showPg(name,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pg-'+name).classList.add('active');
+  btn.classList.add('active');
+  curPage=name; renderCur();
+}
+function renderCur(){
+  if(curPage==='theory') renderTools();
+  if(curPage==='quiz') renderQuiz();
+  if(curPage==='checklist') renderCL();
+  if(curPage==='results') renderRes();
+  if(curPage==='lit') renderLit();
+  if(curPage==='glossary') renderGL();
+}
+
+// ═══════════════════════════════════════════
+// THEORY
+// ═══════════════════════════════════════════
+function renderTools(){
+  const tools=getToolsData(lang);
+  const g=document.getElementById('toolsGrid'),dv=document.getElementById('detailV');
+  if(curDetail){
+    g.style.display='none';dv.classList.add('active');
+    const tool=tools.find(t=>t.id===curDetail),tl=T[lang];
+    document.getElementById('detailC').innerHTML=`
+      <div class="d-hero"><div class="d-ic">${tool.icon}</div><div class="d-nm">${tool.name}</div><div class="d-tag">${tool.tag}</div><div class="d-desc">${tool.full}</div></div>
+      <div class="d-sec"><div class="d-slb">${tl.stepsLb}</div>${tool.steps.map(s=>`<div class="step-r"><div class="sn">${s.n}</div><div><div class="st">${s.t}</div><div class="sd">${s.d}</div></div></div>`).join('')}</div>
+      <div class="d-sec"><div class="d-slb">${tl.bensLb}</div><div class="pills">${tool.benefits.map(b=>`<span class="pill">${b}</span>`).join('')}</div></div>`;
+  } else {
+    g.style.display='block';dv.classList.remove('active');
+    g.innerHTML=tools.map(t=>`<div class="tool-row" onclick="openD('${t.id}')"><span class="t-ic">${t.icon}</span><div style="flex:1;min-width:0"><div class="t-nm">${t.name}</div><div class="t-ds">${t.desc}</div></div><span style="color:var(--t2);font-size:16px;flex-shrink:0">›</span></div>`).join('');
+  }
+}
+function openD(id){curDetail=id;renderTools();}
+function closeDetail(){curDetail=null;renderTools();}
+
+// ═══════════════════════════════════════════
+// QUIZ
+// ═══════════════════════════════════════════
+function renderQuiz(){
+  const qs=QUIZ[lang],t=T[lang],b=document.getElementById('quizBody');
+  if(qIdx>=qs.length){
+    const pct=Math.round((qScore/qs.length)*100),msg=pct===100?t.qGreat:pct>=60?t.qGood:t.qTry;
+    b.innerHTML=`<div class="qres"><div class="qscore">${qScore}/${qs.length}</div><div class="qslb">${t.qRLb}</div><div class="qmsg">${msg}</div><button class="qrst" onclick="restartQ()">${t.qRestart}</button></div>`;return;
+  }
+  const q=qs[qIdx];
+  b.innerHTML=`<div class="qpb"><div class="qpf" style="width:${(qIdx/qs.length)*100}%"></div></div><div class="qc">${t.qOf} ${qIdx+1} / ${qs.length}</div><div class="qq">${q.q}</div><div class="qopts">${q.opts.map((o,i)=>`<button class="qo" onclick="ansQ(${i})">${o}</button>`).join('')}</div><div class="qfb" id="qfb"></div><button class="qnxt" id="qnxt" onclick="nextQ()">${qIdx===qs.length-1?t.qFinish:t.qNext}</button>`;
+  qAnswered=false;
+}
+function ansQ(i){
+  if(qAnswered)return;qAnswered=true;
+  const q=QUIZ[lang][qIdx],opts=document.querySelectorAll('.qo');
+  opts.forEach(o=>o.classList.add('disabled'));
+  if(i===q.c){opts[i].classList.add('correct');qScore++;document.getElementById('qfb').className='qfb correct';document.getElementById('qfb').textContent='✅ '+q.e;}
+  else{opts[i].classList.add('wrong');opts[q.c].classList.add('correct');document.getElementById('qfb').className='qfb wrong';document.getElementById('qfb').textContent='❌ '+q.e;}
+  document.getElementById('qnxt').style.display='block';
+}
+function nextQ(){qIdx++;renderQuiz();}
+function restartQ(){qIdx=0;qScore=0;qAnswered=false;renderQuiz();}
+
+// ═══════════════════════════════════════════
+// CHECKLIST (с вкладками аудитов)
+// ═══════════════════════════════════════════
+function renderCL(){
+  const data=getClData(lang);
+  const t=T[lang];
+  // Tabs
+  document.getElementById('auditTabs').innerHTML=
+    `<button class="at ${curAudit==='all'?'active':''}" onclick="setAudit('all')">${t.auditAll}</button>`+
+    data.map(a=>`<button class="at ${curAudit===a.id?'active':''}" onclick="setAudit('${a.id}')" style="${curAudit===a.id?'background:'+a.color+';border-color:'+a.color+';color:#fff':''}">${a.icon} ${a.name}</button>`).join('');
+
+  // Items
+  let total=0,done=0,html='';
+  const visible=curAudit==='all'?data:data.filter(a=>a.id===curAudit);
+  visible.forEach(audit=>{
+    if(curAudit==='all') html+=`<div style="font-size:12px;font-weight:800;color:${audit.color};margin:12px 0 6px;display:flex;align-items:center;gap:6px">${audit.icon} ${audit.name}</div>`;
+    audit.sections.forEach((sec,si)=>{
+      const ai=data.findIndex(a=>a.id===audit.id);
+      html+=`<div class="cl-sh">${sec.s}</div>`;
+      sec.items.forEach((item,ii)=>{
+        const k=`${audit.id}-${si}-${ii}`,c=clState[k];
+        if(c)done++;total++;
+        html+=`<div class="cl-it ${c?'chk':''}" onclick="toggleCL('${k}')"><div class="cl-bx">${c?'✓':''}</div><div class="cl-tx">${item}</div></div>`;
+      });
+    });
+  });
+  document.getElementById('clBody').innerHTML=html;
+  document.getElementById('clDone').textContent=done;
+  document.getElementById('clTotal').textContent=total;
+  document.getElementById('clBar').style.width=total?(done/total*100)+'%':'0%';
+}
+function setAudit(id){curAudit=id;renderCL();}
+function toggleCL(k){clState[k]=!clState[k];DB.set('cl_state',clState);renderCL();}
+function resetCL(){clState={};DB.set('cl_state',clState);renderCL();}
+
+// ═══════════════════════════════════════════
+// RESULTS
+// ═══════════════════════════════════════════
+function renderRes(){
+  const t=T[lang];
+  document.getElementById('companyName').value=RES.company;
+  document.getElementById('kpiGrid').innerHTML=KPI_DEF.map(k=>`
+    <div class="kpi-card"><div class="kpi-icon">${k.icon}</div><div class="kpi-nm">${k.label[lang]}</div>
+    <div class="kpi-val-wrap"><div class="kpi-val" contenteditable="true" inputmode="decimal" onblur="saveKpi('${k.id}',this.textContent)" onkeydown="if(event.key==='Enter'){this.blur();return false}">${RES.kpis[k.id]||''}</div><span class="kpi-unit">${k.unit}</span></div></div>`).join('');
+  document.getElementById('projList').innerHTML=RES.projects.map((p,i)=>`
+    <div class="proj-card"><div class="proj-top"><input class="proj-name" placeholder="${t.pjPh}" value="${(p.name||'').replace(/"/g,'&quot;')}" oninput="savePj(${i},'name',this.value)"/><button class="del-b" onclick="delPj(${i})">✕</button></div>
+    <div class="proj-row">
+      <div class="proj-field"><span class="pf-lb">${t.pjBefore}</span><input class="pf-in" placeholder="—" value="${p.before||''}" oninput="savePj(${i},'before',this.value)"/></div>
+      <div class="proj-field"><span class="pf-lb">${t.pjAfter}</span><input class="pf-in aft" placeholder="—" value="${p.after||''}" oninput="savePj(${i},'after',this.value)"/></div>
+      <div class="proj-field"><span class="pf-lb">${t.pjEffect}</span><input class="pf-in eff" placeholder="—" value="${p.effect||''}" oninput="savePj(${i},'effect',this.value)"/></div>
+    </div></div>`).join('');
+}
+function saveRes(){RES.company=document.getElementById('companyName').value;tryLS();}
+function saveKpi(id,val){RES.kpis[id]=val.trim();tryLS();}
+function savePj(i,f,v){RES.projects[i][f]=v;tryLS();}
+function tryLS(){try{DB.set('co',RES.company);DB.set('kpis',RES.kpis);DB.set('pj',RES.projects);}catch(e){}}
+function addProject(){RES.projects.push({id:Date.now(),name:'',before:'',after:'',effect:''});tryLS();renderRes();}
+function delPj(i){if(RES.projects.length===1){RES.projects=[{id:Date.now(),name:'',before:'',after:'',effect:''}];}else{RES.projects.splice(i,1);}tryLS();renderRes();}
+
+// ═══════════════════════════════════════════
+// LITERATURE
+// ═══════════════════════════════════════════
+function renderLit(){
+  const t=T[lang];
+  const lv={beg:'b-beg',mid:'b-mid',adv:'b-adv'},lvL={beg:t.bBeg,mid:t.bMid,adv:t.bAdv};
+  document.getElementById('litBody').innerHTML=BOOKS.map(b=>`
+    <div class="book-card"><div class="book-top"><span class="book-em">${b.emoji}</span>
+      <div class="book-info"><div class="book-title">${b.title[lang]}</div><div class="book-author">${b.author}, ${b.year}</div>
+      <div class="book-badges"><span class="badge ${b.free?'b-free':'b-paid'}">${b.free?t.bFree:t.bPaid}</span><span class="badge ${lv[b.level]}">${lvL[b.level]}</span></div></div></div>
+    <div class="book-desc">${b.desc[lang]}</div>
+    <a class="book-link ${b.free?'free':''}" href="${b.link}" target="_blank" rel="noopener">${b.free?t.dlFree:t.dlPaid} →</a></div>`).join('');
+}
+
+// ═══════════════════════════════════════════
+// GLOSSARY
+// ═══════════════════════════════════════════
+function renderGL(){
+  const q=glFilter.toLowerCase(),items=q?GLOSSARY.filter(g=>g.term.toLowerCase().includes(q)||g.def[lang].toLowerCase().includes(q)):GLOSSARY;
+  document.getElementById('glBody').innerHTML=items.map(g=>`
+    <div class="gl-it"><div class="gl-term">${g.term}</div><div class="gl-orig">${g.orig}</div><div class="gl-def">${g.def[lang]}</div></div>`).join('');
+}
+function filterGL(){glFilter=document.getElementById('srch').value;renderGL();}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+applyT();renderTools();renderQuiz();renderCL();renderRes();renderLit();renderGL();
+</script>
+</body>
+</html>
